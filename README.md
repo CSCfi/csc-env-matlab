@@ -54,9 +54,6 @@ We define the base container using Ubuntu named `ubuntu_22.04.def`.
 Bootstrap: docker
 From: ubuntu:22.04
 
-%environment
-    export LC_ALL=C
-
 %post
     apt-get --quiet update && \
     DEBIAN_FRONTEND=noninteractive \
