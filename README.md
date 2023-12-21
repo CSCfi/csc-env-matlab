@@ -14,14 +14,12 @@ The rollowing files will be created into your working directory.
 └── ubuntu_20.04.sif           # base apptainer container
 ```
 
----
-
+### Download the license and installer
 Go to the [license center](https://mathworks.com/licensecenter/) and download the appropriate license and name it as `lisense.dat`.
 
 Go to the [downloads page](https://mathworks.com/downloads/) and select the latest version and download matlab the installer for Linux.
 
----
-
+### Unarchive the installer
 Create directory for the installer and unarchive the installer files to the directory.
 
 ```bash
@@ -29,8 +27,7 @@ mkdir matlab_R2023b_glnxa64  # create the installer directory
 unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
 ```
 
----
-
+### Create the installation
 Create installation directory and install matlab using the graphical installer to the directory.
 
 ```bash
@@ -53,16 +50,14 @@ Change permissive access rights to the installation.
 chmod -R u=rwX,g=rX,o=rX matlab_r2023b
 ```
 
----
-
+### Create squashfs from the installation
 Create squashfs from the matlab installation.
 
 ```bash
 mksquashfs matlab_r2023b matlab_r2023b.sqfs -progress -all-root
 ```
 
----
-
+### Build the base container
 We define the base container using Ubuntu named `ubuntu_22.04.def`.
 
 ```sif
@@ -83,8 +78,7 @@ Then, we can build it.
 apptainer build ubuntu_22.04.sif ubuntu_22.04.def
 ```
 
----
-
+### Run and test the container
 Finally, we can run the container.
 
 ```bash
