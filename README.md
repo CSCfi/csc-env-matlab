@@ -1,12 +1,13 @@
 # CSC Matlab Environment
-In this repository we create a containerized MATLAB installation for Linux with Squashfs and Apptainer.
+In this repository we create a containerized MATLAB or MATLAB Parallel Server (MPS) installation for Linux with Squashfs and Apptainer.
+This guide is useful for installing matlab into a cluster or server that uses a license manager.
 
 ## Instructions
 The rollowing files will be created into your working directory.
 
 ```text
 .                              # working directory
-├── lisence.dat                # lisence file
+├── network.lic                # network license file
 ├── matlab_R2023b_glnxa64.zip  # downloaded installer
 ├── matlab_R2023b_glnxa64/     # installer directory
 ├── matlab_r2023b/             # installation directory
@@ -14,9 +15,15 @@ The rollowing files will be created into your working directory.
 └── ubuntu_20.04.sif           # base apptainer container
 ```
 
-### Download the license and installer
-Go to the [license center](https://mathworks.com/licensecenter/) and download the appropriate license and name it as `lisense.dat`.
+### Network license file
+Create `network.lic` file that contains appropriate values to use a license server.
 
+```text
+SERVER <server-name> <host-id> <lmgrd-port>
+USE_SERVER
+```
+
+### Download the installer
 Go to the [downloads page](https://mathworks.com/downloads/) and select the latest version and download matlab the installer for Linux.
 
 ### Unarchive the installer
@@ -38,11 +45,12 @@ mkdir matlab_r2023b  # create the installation directory
 During the installation we must set the following options:
 
 * Select appropriate license for the installation.
-* Use the downloaded license file.
+* Use the network license.
 * Select path to the installation directory.
 * Unselect options to create symbolic links and sending information to matlab.
+* Select necessary toolboxes to install.
 
-We shoud add missing `matlab_r2023b/toolbox/local/mpiLibConf.m` to the installation when installing Parallel Server.
+If we are installing MATLAB Parallel Server, we can add missing `mpiLibConf.m` to the installation the `matlab_r2023b/toolbox/local/` directory.
 
 Change permissive access rights to the installation.
 
