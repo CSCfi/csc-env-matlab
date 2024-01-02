@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ "$1" = "-parallel" ]; then
+    export MDCE_PARALLEL=1
+    shift
+fi
+
+# Call matlab with the right arguments
+matlab -parallelserver -nodisplay -r distcomp_evaluate_filetask "$@"

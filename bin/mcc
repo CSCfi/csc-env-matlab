@@ -1,0 +1,2 @@
+#!/bin/bash
+apptainer_wrapper exec "$MATLAB/bin/mcc" "$@"
