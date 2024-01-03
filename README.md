@@ -1,6 +1,9 @@
 # CSC Matlab Environment
-In this repository we create a containerized MATLAB or MATLAB Parallel Server (MPS) installation for Linux with Squashfs and Apptainer.
-This guide is useful for installing matlab into a cluster or server that uses a license manager.
+In this repository contains intructions for creating a containerized MATLAB or MATLAB Parallel Server (MPS) installation for Linux with Squashfs and Apptainer.
+Containerized installation is useful for Linux cluster or server environments.
+We use a network license for the installation.
+Network license queries the license permissions from a license server
+
 
 ## Instructions
 The rollowing files will be created into your working directory.
@@ -16,12 +19,14 @@ The rollowing files will be created into your working directory.
 ```
 
 ### Network license file
-Create `network.lic` file that contains appropriate values to use a license server.
+We need a license file, such as `network.lic` to connect to the license server.
 
 ```text
-SERVER <server-name> <host-id> <lmgrd-port>
+SERVER <hostname> <host-id> <lmgrd-port>
 USE_SERVER
 ```
+
+The license file must contain appropriate values for hostname and host ID (MAC address) of the license server and TCP/IP port number of the license manager daemon (lmgrd) on the license server.
 
 ### Download the installer
 Go to the [downloads page](https://mathworks.com/downloads/) and select the latest version and download matlab the installer for Linux.
@@ -75,8 +80,7 @@ From: ubuntu:22.04
 %post
     apt-get --quiet update && \
     DEBIAN_FRONTEND=noninteractive \
-    apt-get install -y \
-        xorg && \
+    apt-get install -y xorg && \
     rm -rf /var/lib/apt/lists/*
 ```
 
