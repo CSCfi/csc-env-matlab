@@ -47,13 +47,21 @@ mkdir matlab_r2023b  # create the installation directory
 ./matlab_R2023b_glnxa64/install
 ```
 
+Supply your login information.
 During the installation we must set the following options:
 
-* Select appropriate license for the installation.
-* Use the network license.
-* Select path to the installation directory.
-* Unselect options to create symbolic links and sending information to matlab.
-* Select necessary toolboxes to install.
+* LICENSING
+    - Select appropriate license for the installation.
+    - Select the license file `network.lic`.
+* DESTINATION
+    - Select path to the installation directory.
+* PRODUCTS
+    - Select necessary toolboxes to install.
+    - For normal installation choose `MATLAB`, `MATLAB Compiler`, `MATLAB Compiler SDK`, and `Parallel Computing Toolbox`
+    - For parallel server installation choose `MATLAB` and `MATLAB Parallel Server`
+* OPTIONS
+    - Unselect options to create symbolic links and sending information to matlab.
+* CONFIRMATION
 
 If we are installing MATLAB Parallel Server, we can add missing `mpiLibConf.m` to the installation the `matlab_r2023b/toolbox/local/` directory.
 
