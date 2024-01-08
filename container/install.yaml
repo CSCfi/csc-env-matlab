@@ -1,0 +1,25 @@
+- name: "Install matlab base container"
+  hosts:
+    - "group_localhost"
+    - "group_puhti"
+  become: false
+  vars:
+    container: "ubuntu_22.04.sif"
+
+  tasks:
+    - name: "Create a matlab application directory"
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "matlab"
+        - "matlab/container"
+
+    - name: "Copy the container"
+      ansible.builtin.copy:
+        src: "{{ inventory_dir }}/build/{{ container }}"
+        dest: "{{ appl_dir }}/matlab/container/{{ container }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"

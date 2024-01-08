@@ -5,7 +5,6 @@
   become: false
   vars:
     matlab_version: "r2023b"
-    base_container: "ubuntu_22.04.sif"
 
   tasks:
     - name: "Create a matlab application directory"
@@ -16,28 +15,21 @@
         group: "{{ group }}"
       loop:
         - "matlab"
-        - "matlab/base"
-        - "matlab/{{ matlab_version }}_interactive"
-        - "matlab/{{ matlab_version }}_interactive/bin"
-
-    - name: "Copy the base container"
-      ansible.builtin.copy:
-        src: "{{ inventory_dir }}/build/{{ base_container }}"
-        dest: "{{ appl_dir }}/matlab/base/{{ base_container }}"
-        mode: "ug=rwx,o=rx"
-        group: "{{ group }}"
+        - "matlab/interactive"
+        - "matlab/interactive/{{ matlab_version }}"
+        - "matlab/interactive/{{ matlab_version }}/bin"
 
     - name: "Copy the installation"
       ansible.builtin.copy:
         src: "{{ inventory_dir }}/build/{{ matlab_version}}_interactive.sqfs"
-        dest: "{{ appl_dir }}/matlab/{{ matlab_version }}_interactive/matlab.sqfs"
+        dest: "{{ appl_dir }}/matlab/interactive/{{ matlab_version }}/matlab.sqfs"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/{{ matlab_version }}_interactive/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/interactive/{{ matlab_version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
@@ -58,6 +50,6 @@
     - name: "Copy the modulefile"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/modulefiles/matlab.lua"
-        dest: "{{ modulefiles_dir }}/matlab/{{ matlab_version }}_interactive.lua"
+        dest: "{{ modulefiles_dir }}/matlab/{{ matlab_version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
