@@ -1,0 +1,63 @@
+- name: "Install matlab environment"
+  hosts:
+    - "group_localhost"
+    - "group_puhti"
+  become: false
+  vars:
+    matlab_version: "r2023b"
+    base_container: "ubuntu_22.04.sif"
+
+  tasks:
+    - name: "Create a matlab application directory"
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "matlab"
+        - "matlab/base"
+        - "matlab/{{ matlab_version }}_interactive"
+        - "matlab/{{ matlab_version }}_interactive/bin"
+
+    - name: "Copy the base container"
+      ansible.builtin.copy:
+        src: "{{ inventory_dir }}/build/{{ base_container }}"
+        dest: "{{ appl_dir }}/matlab/base/{{ base_container }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+
+    - name: "Copy the installation"
+      ansible.builtin.copy:
+        src: "{{ inventory_dir }}/build/{{ matlab_version}}_interactive.sqfs"
+        dest: "{{ appl_dir }}/matlab/{{ matlab_version }}_interactive/matlab.sqfs"
+        mode: "ug=rw,o=r"
+        group: "{{ group }}"
+
+    - name: "Copy the wrapper scripts"
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/{{ matlab_version }}_interactive/bin/{{ item }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+      loop:
+        - "matlab"
+        - "matlab-cli"
+        - "matlab-batch"
+        - "mcc"
+        - "mbuild"
+        - "mex"
+
+    - name: "Create a matlab modulefiles directory"
+      ansible.builtin.file:
+        path: "{{ modulefiles_dir }}/matlab"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+
+    - name: "Copy the modulefile"
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/modulefiles/matlab.lua"
+        dest: "{{ modulefiles_dir }}/matlab/{{ matlab_version }}_interactive.lua"
+        mode: "ug=rw,o=r"
+        group: "{{ group }}"

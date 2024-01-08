@@ -58,12 +58,12 @@ During the installation we must set the following options:
 
 * LICENSING
     - Select appropriate license for the installation.
-    - Select the license file `license.lic`.
+    - If required, supply the license file `license.lic`.
 * DESTINATION
     - Select path to the installation directory.
 * PRODUCTS
     - Select necessary toolboxes to install.
-    - For normal installation choose `MATLAB`, `MATLAB Compiler`, `MATLAB Compiler SDK`, and `Parallel Computing Toolbox`
+    - For interactive installation choose `MATLAB`, `MATLAB Compiler`, `MATLAB Compiler SDK`, and `Parallel Computing Toolbox`
     - For parallel server installation choose `MATLAB` and `MATLAB Parallel Server`
 * OPTIONS
     - Unselect options to create symbolic links and sending information to matlab.

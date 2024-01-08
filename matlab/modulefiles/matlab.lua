@@ -5,11 +5,11 @@ version = myModuleVersion()
 appl_dir = "/appl/soft/math/matlab"
 
 -- Add wrapper scripts to the path.
-bin_dir = pathJoin(appl_dir, "bin")
+bin_dir = pathJoin(appl_dir, version, "bin")
 prepend_path("PATH", bin_dir)
 
 -- Path to the squashfs containing matlab installation.
-squashfs = pathJoin(appl_dir, version .. ".sqfs")
+squashfs = pathJoin(appl_dir, version, "matlab.sqfs")
 
 -- Add matlab path to environment.
 -- It is the path where matlab is mounted inside to the container.

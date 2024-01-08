@@ -1,0 +1,8 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%post
+    apt-get --quiet update && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y xorg && \
+    rm -rf /var/lib/apt/lists/*
