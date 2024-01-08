@@ -13,7 +13,7 @@ The rollowing files will be created into your working directory.
 ├── matlab_R2023b_glnxa64/     # installer directory
 ├── matlab_r2023b/             # installation directory
 ├── matlab_r2023b.sqfs         # squashfs of the installation directory
-└── ubuntu_20.04.sif           # base apptainer container
+└── ubuntu_22.04.sif           # base apptainer container
 ```
 
 ### Network license file
