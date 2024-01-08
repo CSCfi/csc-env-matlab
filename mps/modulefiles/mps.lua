@@ -23,4 +23,4 @@ image = pathJoin(appl_dir, "container", "ubuntu_22.04.sif")
 setenv("SING_IMAGE", image)
 
 -- Flags for mounting the squashfs of matlab installation using `apptainer_wrapper`.
-setenv("SING_FLAGS", "-B " .. squashfs .. ":" .. matlab .. ":image-src/")
+setenv("SING_FLAGS", "-B " .. squashfs .. ":" .. matlab .. ":image-src=/")
