@@ -1,0 +1,52 @@
+- name: "Install mps environment"
+  hosts:
+    - "group_localhost"
+    - "group_puhti"
+  become: false
+  vars:
+    matlab_version: "r2023b"
+
+  tasks:
+    - name: "Create a mps application directory"
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "matlab"
+        - "matlab/mps"
+        - "matlab/mps/{{ matlab_version }}"
+        - "matlab/mps/{{ matlab_version }}/bin"
+
+    - name: "Copy the installation"
+      ansible.builtin.copy:
+        src: "{{ inventory_dir }}/build/{{ matlab_version}}_mps.sqfs"
+        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/mps.sqfs"
+        mode: "ug=rw,o=r"
+        group: "{{ group }}"
+
+    - name: "Copy the wrapper scripts"
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+      loop:
+        - "matlab"
+        - "mex"
+        - "worker"
+
+    - name: "Create a matlab modulefiles directory"
+      ansible.builtin.file:
+        path: "{{ modulefiles_dir }}/mps"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+
+    - name: "Copy the modulefile"
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/modulefiles/mps.lua"
+        dest: "{{ modulefiles_dir }}/mps/{{ matlab_version }}.lua"
+        mode: "ug=rw,o=r"
+        group: "{{ group }}"
