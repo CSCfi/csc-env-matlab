@@ -1,8 +1,6 @@
 # CSC Matlab Environment
 In this repository contains intructions for creating a containerized MATLAB or MATLAB Parallel Server (MPS) installation for Linux with Squashfs and Apptainer.
-Containerized installation is useful for Linux cluster or server environments.
-We use a network license for the installation.
-Network license queries the license permissions from a license server
+Containerized installation is useful for Linux cluster environments.
 
 
 ## Instructions
@@ -10,7 +8,7 @@ The rollowing files will be created into your working directory.
 
 ```text
 .                              # working directory
-├── network.lic                # network license file
+├── license.lic                # license file
 ├── matlab_R2023b_glnxa64.zip  # downloaded installer
 ├── matlab_R2023b_glnxa64/     # installer directory
 ├── matlab_r2023b/             # installation directory
@@ -19,7 +17,9 @@ The rollowing files will be created into your working directory.
 ```
 
 ### Network license file
-We need a license file, such as `network.lic` to connect to the license server.
+We use a network license for the installation.
+Network license queries the license permissions from a license server
+We need a license file, `license.lic`, to connect to the license server.
 
 ```text
 SERVER <hostname> <host-id> <lmgrd-port>
@@ -35,7 +35,10 @@ Go to the [downloads page](https://mathworks.com/downloads/) and select the late
 Create directory for the installer and unarchive the installer files to the directory.
 
 ```bash
-mkdir matlab_R2023b_glnxa64  # create the installer directory
+# Create the installer directory
+mkdir matlab_R2023b_glnxa64
+
+# Unarchive the installer into the directory
 unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
 ```
 
@@ -43,7 +46,10 @@ unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
 Create installation directory and install matlab using the graphical installer to the directory.
 
 ```bash
-mkdir matlab_r2023b  # create the installation directory
+# Create the installation directory
+mkdir matlab_r2023b
+
+# Run the installer
 ./matlab_R2023b_glnxa64/install
 ```
 
@@ -52,7 +58,7 @@ During the installation we must set the following options:
 
 * LICENSING
     - Select appropriate license for the installation.
-    - Select the license file `network.lic`.
+    - Select the license file `license.lic`.
 * DESTINATION
     - Select path to the installation directory.
 * PRODUCTS
@@ -62,9 +68,12 @@ During the installation we must set the following options:
 * OPTIONS
     - Unselect options to create symbolic links and sending information to matlab.
 * CONFIRMATION
+    - Confirm the installation.
 
+### Adding files to the installation
 If we are installing MATLAB Parallel Server, we can add missing `mpiLibConf.m` to the installation the `matlab_r2023b/toolbox/local/` directory.
 
+### Changing access rights
 Change permissive access rights to the installation.
 
 ```bash
