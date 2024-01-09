@@ -24,3 +24,10 @@ setenv("SING_IMAGE", image)
 
 -- Flags for mounting the squashfs of matlab installation using `apptainer_wrapper`.
 setenv("SING_FLAGS", "-B " .. squashfs .. ":" .. matlab .. ":image-src=/")
+
+-- Load message and license disclaimer
+loadmsg = "\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------\n"
+
+if (mode() == "load") then
+  LmodMessage(loadmsg)
+end

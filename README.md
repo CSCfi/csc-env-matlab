@@ -63,8 +63,8 @@ During the installation we must set the following options:
     - Select path to the installation directory.
 * PRODUCTS
     - Select necessary toolboxes to install.
-    - For interactive installation choose `MATLAB`, `MATLAB Compiler`, `MATLAB Compiler SDK`, and `Parallel Computing Toolbox`
-    - For parallel server installation choose `MATLAB` and `MATLAB Parallel Server`
+    - CSC's interactive installation requires `MATLAB`, `MATLAB Compiler`, `MATLAB Compiler SDK`, and `Parallel Computing Toolbox`
+    - CSC's parallel server installation requires `MATLAB` and `MATLAB Parallel Server`
 * OPTIONS
     - Unselect options to create symbolic links and sending information to matlab.
 * CONFIRMATION
@@ -118,6 +118,9 @@ apptainer --silent exec --bind="matlab_r2023b.sqfs:$MATLAB:image-src=/" ubuntu_2
 We can test matlab by running the following commands
 
 ```bash
-/opt/matlab/bin/matlab -nodisplay -nodesktop -nojvm -r "quit"
-/opt/matlab/bin/matlab -batch "hello"
+$MATLAB/bin/matlab -nodisplay -nodesktop -nojvm -r "quit"
+```
+
+```bash
+$MATLAB/bin/matlab -batch "hello"
 ```

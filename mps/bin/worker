@@ -5,4 +5,4 @@ if [ "$1" = "-parallel" ]; then
 fi
 
 # Call matlab with the right arguments
-matlab -parallelserver -nodisplay -r distcomp_evaluate_filetask "$@"
+apptainer_wrapper exec "$MATLAB/bin/matlab" -parallelserver -nodisplay -r distcomp_evaluate_filetask "$@"
