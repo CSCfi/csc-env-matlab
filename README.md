@@ -4,11 +4,10 @@ Containerized installation is useful for Linux cluster environments.
 
 
 ## Instructions
-The rollowing files will be created into your working directory.
+The rollowing files will be created into the `build` directory.
 
 ```text
-.                              # working directory
-├── license.lic                # license file
+build/                         # build directory
 ├── matlab_R2023b_glnxa64.zip  # downloaded installer
 ├── matlab_R2023b_glnxa64/     # installer directory
 ├── matlab_r2023b/             # installation directory
@@ -16,10 +15,16 @@ The rollowing files will be created into your working directory.
 └── ubuntu_22.04.sif           # base apptainer container
 ```
 
+We should create it as follows:
+
+```bash
+mkdir -p build
+```
+
 ### Network license file
 We use a network license for the installation.
 Network license queries the license permissions from a license server
-We need a license file, `license.lic`, to connect to the license server.
+We need a license file (such as `license.lic) to connect to the license server with contents as follows:
 
 ```text
 SERVER <hostname> <host-id> <lmgrd-port>
@@ -36,10 +41,10 @@ Create directory for the installer and unarchive the installer files to the dire
 
 ```bash
 # Create the installer directory
-mkdir matlab_R2023b_glnxa64
+mkdir build/matlab_R2023b_glnxa64
 
 # Unarchive the installer into the directory
-unzip matlab_R2023b_glnxa64.zip -d matlab_R2023b_glnxa64
+unzip build/matlab_R2023b_glnxa64.zip -d build/matlab_R2023b_glnxa64
 ```
 
 ### Create the installation
@@ -47,10 +52,10 @@ Create installation directory and install matlab using the graphical installer t
 
 ```bash
 # Create the installation directory
-mkdir matlab_r2023b
+mkdir build/matlab_r2023b
 
 # Run the installer
-./matlab_R2023b_glnxa64/install
+./build/matlab_R2023b_glnxa64/install
 ```
 
 Supply your login information.
@@ -58,7 +63,8 @@ During the installation we must set the following options:
 
 * LICENSING
     - Select appropriate license for the installation.
-    - If required, supply the license file `license.lic`.
+    - If required, supply the license file.
+      For CSC installations, we can use the `config/network.lic` file.
 * DESTINATION
     - Select path to the installation directory.
 * PRODUCTS
@@ -73,38 +79,29 @@ During the installation we must set the following options:
 ### Adding files to the installation
 If we are installing MATLAB Parallel Server, we can add missing `mpiLibConf.m` to the installation the `matlab_r2023b/toolbox/local/` directory.
 
+```bash
+cp config/mpiLibConf.m build/matlab_r2023b/toolbox/local/mpiLibConf.m
+```
+
 ### Changing access rights
 Change permissive access rights to the installation.
 
 ```bash
-chmod -R u=rwX,g=rX,o=rX matlab_r2023b
+chmod -R u=rwX,g=rX,o=rX build/matlab_r2023b
 ```
 
 ### Create squashfs from the installation
 Create squashfs from the matlab installation.
 
 ```bash
-mksquashfs matlab_r2023b matlab_r2023b.sqfs -progress -all-root
+mksquashfs build/matlab_r2023b build/matlab_r2023b.sqfs -progress -all-root
 ```
 
 ### Build the base container
-We define the base container using Ubuntu named `ubuntu_22.04.def`.
-
-```sif
-Bootstrap: docker
-From: ubuntu:22.04
-
-%post
-    apt-get --quiet update && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install -y xorg && \
-    rm -rf /var/lib/apt/lists/*
-```
-
-Then, we can build it.
+We define the base container using Ubuntu named `ubuntu_22.04.def` and build it as follows:
 
 ```bash
-apptainer build ubuntu_22.04.sif ubuntu_22.04.def
+apptainer build build/ubuntu_22.04.sif container/ubuntu_22.04.def
 ```
 
 ### Run and test the container
