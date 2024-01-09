@@ -34,11 +34,12 @@
         group: "{{ group }}"
       loop:
         - "matlab"
-        - "matlab-cli"
-        - "matlab-batch"
         - "mcc"
         - "mbuild"
         - "mex"
+        - "matlab-cli"
+        - "matlab-batch"
+        - "matlab-fix-toolbox-path"
 
     - name: "Create a matlab modulefiles directory"
       ansible.builtin.file:
