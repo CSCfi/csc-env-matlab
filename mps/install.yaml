@@ -36,3 +36,4 @@
         - "matlab"
         - "mex"
         - "worker"
+        - "matlab-cli"

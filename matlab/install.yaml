@@ -38,7 +38,6 @@
         - "mbuild"
         - "mex"
         - "matlab-cli"
-        - "matlab-batch"
         - "matlab-fix-toolbox-path"
 
     - name: "Create a matlab modulefiles directory"
