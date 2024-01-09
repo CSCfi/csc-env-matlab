@@ -64,7 +64,7 @@ During the installation we must set the following options:
 * LICENSING
     - Select appropriate license for the installation.
     - If required, supply the license file.
-      For CSC installations, we can use the `config/network.lic` file.
+      For CSC installations, we can use the `license/network.lic` file.
 * DESTINATION
     - Select path to the installation directory.
 * PRODUCTS
@@ -77,7 +77,7 @@ During the installation we must set the following options:
     - Confirm the installation.
 
 ### Adding files to the installation
-If we are installing MATLAB Parallel Server, we can add missing `mpiLibConf.m` to the installation the `matlab_r2023b/toolbox/local/` directory.
+When installing MATLAB Parallel Server, we need to add MPI configuration to the local toolboxes.
 
 ```bash
 cp config/mpiLibConf.m build/matlab_r2023b/toolbox/local/mpiLibConf.m
