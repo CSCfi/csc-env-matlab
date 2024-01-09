@@ -1,4 +1,11 @@
 #!/bin/bash
+APPL_DIR="/appl/soft/math/matlab"
+MATLAB_VERSION="r2023b"
+SQUASHFS_FILE="$APPL_DIR/mps/$MATLAB_VERSION/mps.sqfs"
+export MATLAB="/opt/matlab"
+export SING_IMAGE="$APPL_DIR/container/ubuntu_22.04.sif"
+export SING_FLAGS="-B $SQUASHFS_FILE:$MATLAB:image-src=/"
+
 if [ "$1" = "-parallel" ]; then
     export MDCE_PARALLEL=1
     shift
