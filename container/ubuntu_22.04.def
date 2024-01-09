@@ -9,4 +9,6 @@ From: ubuntu:22.04
     apt-get --quiet update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y xorg gcc-11 gfortran-10 && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    ln -sf /bin/gcc-11 /bin/gcc && \
+    ln -sf /bin/gfortran-10 /bin/gfortran
