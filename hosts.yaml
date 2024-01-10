@@ -10,7 +10,7 @@ group_localhost:
     modulefiles_dir: "{{ ansible_env.HOME}}/scratch/appl/modulefiles"
 group_puhti:
   hosts:
-    puhti-install:
+    puhti-login13.csc.fi:
       ansible_connection: "ssh"
       ansible_python_interpreter: "/usr/bin/python3.9"
       ansible_remote_tmp: "/local_scratch/$USER/.ansible/tmp"
