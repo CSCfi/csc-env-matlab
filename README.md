@@ -64,7 +64,7 @@ During the installation we must set the following options:
 * LICENSING
     - Select appropriate license for the installation.
     - If required, supply the license file.
-      For CSC installations, we can use the `license/network.lic` file.
+      For CSC's academic installations, we can use the `license/academic.lic` file.
 * DESTINATION
     - Select path to the installation directory.
 * PRODUCTS
