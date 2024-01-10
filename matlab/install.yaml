@@ -39,7 +39,7 @@
         - "mbuild"
         - "mex"
         - "matlab-cli"
-        - "matlab-fix-toolbox-path"
+        - "matlab-fix-toolbox"
 
     - name: "Create a matlab modulefiles directory"
       ansible.builtin.file:
