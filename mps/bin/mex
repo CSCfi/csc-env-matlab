@@ -1,3 +1,2 @@
 #!/bin/bash
-module load .mps/r2023b
 apptainer_wrapper exec "$MATLAB/bin/mex" "$@"
