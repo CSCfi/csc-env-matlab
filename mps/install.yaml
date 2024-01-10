@@ -38,6 +38,7 @@
         - "mex"
         - "worker"
         - "matlab-cli"
+        - "matlab-fix-toolbox"
 
     - name: "Create a mps modulefiles directory"
       ansible.builtin.file:
