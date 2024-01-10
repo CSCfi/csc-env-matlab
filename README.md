@@ -24,7 +24,7 @@ mkdir -p build
 ### Network license file
 We use a network license for the installation.
 Network license queries the license permissions from a license server
-We need a license file (such as `license.lic) to connect to the license server with contents as follows:
+We need a license file (such as `license.lic`) to connect to the license server with contents as follows:
 
 ```text
 SERVER <hostname> <host-id> <lmgrd-port>
