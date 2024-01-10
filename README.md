@@ -109,15 +109,11 @@ Finally, we can run the container.
 
 ```bash
 export MATLAB="/opt/matlab"
-apptainer --silent exec --bind="matlab_r2023b.sqfs:$MATLAB:image-src=/" ubuntu_22.04.sif bash
+apptainer exec -B "build/matlab_r2023b.sqfs:$MATLAB:image-src=/" build/ubuntu_22.04.sif bash
 ```
 
 We can test matlab by running the following commands
 
 ```bash
-$MATLAB/bin/matlab -nodisplay -nodesktop -nojvm -r "quit"
-```
-
-```bash
-$MATLAB/bin/matlab -batch "hello"
+$MATLAB/bin/matlab -nodisplay -nodesktop -nojvm -r "ver; quit;"
 ```
