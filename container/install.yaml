@@ -19,7 +19,8 @@
 
     - name: "Copy the container"
       ansible.builtin.copy:
-        src: "{{ inventory_dir }}/build/{{ container }}"
+        src: "{{ playbook_dir }}/build/{{ container }}"
         dest: "{{ appl_dir }}/matlab/container/{{ container }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
+        checksum: "sha256:f093b0152c01c38991451e09355b2d4d216676a731c30bf7c1b4d828af4356c3"

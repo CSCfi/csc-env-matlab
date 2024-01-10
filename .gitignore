@@ -1,1 +1,4 @@
 build/
+*.sha256
+*.sqfs
+*.sif
