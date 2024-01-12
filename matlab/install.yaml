@@ -21,11 +21,11 @@
 
     - name: "Copy the installation"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/build/{{ matlab_version}}.sqfs"
-        dest: "{{ appl_dir }}/matlab/interactive/{{ matlab_version }}/matlab.sqfs"
-        mode: "ug=rw,o=r"
+        src: "{{ playbook_dir }}/container/{{ matlab_version}}.sif"
+        dest: "{{ appl_dir }}/matlab/interactive/{{ matlab_version }}/matlab.sif"
+        mode: "ug=rwx,o=rx"
         group: "{{ group }}"
-        checksum: "sha256:794052fc15e8028254daeb3494213e3e546b256b2698159e67087546935101c8"
+        checksum: "sha256:b2e35b265ec065918cd459b267533bab6881fdbd48515a7e5c44f701fb699391"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:

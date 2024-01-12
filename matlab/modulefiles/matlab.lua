@@ -8,22 +8,14 @@ appl_dir = "/appl/soft/math/matlab"
 bin_dir = pathJoin(appl_dir, "interactive", version, "bin")
 prepend_path("PATH", bin_dir)
 
--- Path to the squashfs containing matlab installation.
-squashfs = pathJoin(appl_dir, "interactive", version, "matlab.sqfs")
-
 -- Add matlab path to environment.
 -- It is the path where matlab is mounted inside to the container.
 matlab = "/opt/matlab"
 setenv("MATLAB", matlab)
 
--- Path to the base container.
-image = pathJoin(appl_dir, "container", "ubuntu_22.04.sif")
-
--- Image to run using `apptainer_wrapper`.
+-- Path to the matlab container image run using `apptainer_wrapper`.
+image = pathJoin(appl_dir, "interactive", version, "matlab.sif")
 setenv("SING_IMAGE", image)
-
--- Flags for mounting the squashfs of matlab installation using `apptainer_wrapper`.
-setenv("SING_FLAGS", "-B " .. squashfs .. ":" .. matlab .. ":image-src=/")
 
 -- Load message and license disclaimer
 loadmsg = "\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------\n"

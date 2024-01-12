@@ -1,4 +1,4 @@
-# Use localhost for testing
+# Localhost for testing
 group_localhost:
   hosts:
     localhost:
@@ -8,6 +8,8 @@ group_localhost:
     group: "csc"
     appl_dir: "{{ ansible_env.HOME }}/scratch/appl/soft/math"
     modulefiles_dir: "{{ ansible_env.HOME}}/scratch/appl/modulefiles"
+
+# Puhti installation
 group_puhti:
   hosts:
     puhti-login13.csc.fi:
