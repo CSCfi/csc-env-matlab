@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # MATLAB executes this script directly, hence we load the module here.
-module load mps/r2023b
+export MATLAB="/opt/matlab"
+export SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
 
 if [ "$1" = "-parallel" ]; then
     export MDCE_PARALLEL=1
@@ -9,4 +10,4 @@ if [ "$1" = "-parallel" ]; then
 fi
 
 # Call matlab with the right arguments
-matlab -parallelserver -nodisplay -r distcomp_evaluate_filetask "$@"
+apptainer_wrapper exec "$MATLAB/bin/matlab" -parallelserver -nodisplay -r distcomp_evaluate_filetask "$@"
