@@ -1,26 +1,15 @@
 # CSC Matlab Environment
-In this repository contains intructions for creating a containerized MATLAB or MATLAB Parallel Server (MPS) installation for Linux with Apptainer.
+In this repository contains intructions for creating a containerized [MATLAB](https://mathworks.com) or MATLAB Parallel Server (MPS) installation for Linux with [Apptainer](https://apptainer.org/).
 Containerized installation is useful for Linux cluster environments.
-
-The rollowing files will be created into the `build` directory.
-
-```text
-build/                         # build directory
-├── matlab_R2023b_glnxa64.zip  # downloaded installer
-├── matlab_R2023b_glnxa64/     # installer directory
-├── matlab_r2023b/             # installation directory
-├── matlab_r2023b.sif          # matlab apptainer container
-└── ubuntu_22.04.sif           # base apptainer container
-```
-
-We should create it as follows:
-
-```bash
-mkdir -p build
-```
 
 
 ## Creating local MATLAB installation
+* `build/installer/r2023b.zip` is the downloaded installer renamed to the lowercase version string
+* `build/installer/r2023b` is the unarchived installer
+* `matlab/build/r2023b` is the interactive matlab installation directory
+* `mps/build/r2023b` is the matlab parallel server installation directory
+
+
 ### Network license file
 We use a network license for the installation.
 Network license queries the license permissions from a license server
@@ -36,17 +25,16 @@ The license file must contain appropriate values for hostname and host ID (MAC a
 
 ### Download the installer
 Go to the [downloads page](https://mathworks.com/downloads/) and select the latest version and download matlab the installer for Linux.
+Move the installer to `installer` directory and rename it as the version string in lowercase.
 
-
-### Unarchive the installer
 Create directory for the installer and unarchive the installer files to the directory.
 
 ```bash
 # Create the installer directory
-mkdir build/matlab_R2023b_glnxa64
+mkdir -p installer/r2023b
 
 # Unarchive the installer into the directory
-unzip build/matlab_R2023b_glnxa64.zip -d build/matlab_R2023b_glnxa64
+unzip installer/r2023b.zip -d installer/r2023b
 ```
 
 
@@ -55,10 +43,10 @@ Create installation directory and install matlab using the graphical installer t
 
 ```bash
 # Create the installation directory
-mkdir build/matlab_r2023b
+mkdir -p matlab/build/r2023b
 
 # Run the installer
-./build/matlab_R2023b_glnxa64/install
+./installer/r2023b/install
 ```
 
 Supply your login information.
@@ -85,7 +73,7 @@ First we build the base container which installs `xorg` and supported versions o
 We use Ubuntu as the base and build it as follows:
 
 ```bash
-apptainer build container/ubuntu_22.04.sif container/ubuntu_22.04.def
+apptainer build base/ubuntu_22.04.sif base/ubuntu_22.04.def
 ```
 
 Next, we can build the MATLAB container as follows:
