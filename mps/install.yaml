@@ -25,7 +25,7 @@
         dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
-        checksum: "sha256:562828204cf87633f09cdca8e34a424247bad223d6cd6d8ca65e1bc84dbc041e"
+        #checksum: "sha256:562828204cf87633f09cdca8e34a424247bad223d6cd6d8ca65e1bc84dbc041e"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:

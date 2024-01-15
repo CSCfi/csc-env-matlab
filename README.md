@@ -72,40 +72,37 @@ During the installation we must set the following options:
     - Select path to the installation directory.
 * PRODUCTS
     - Select necessary toolboxes to install.
-    - CSC's interactive installation requires `MATLAB`, `MATLAB Compiler`, `MATLAB Compiler SDK`, and `Parallel Computing Toolbox`
-    - CSC's parallel server installation requires `MATLAB` and `MATLAB Parallel Server`
+    - CSC's interactive installation requires *MATLAB*, *MATLAB Compiler*, *MATLAB Compiler SDK*, and *Parallel Computing Toolbox*
+    - CSC's parallel server installation requires *MATLAB* and *MATLAB Parallel Server*
 * OPTIONS
     - Unselect options to create symbolic links and sending information to matlab.
 * CONFIRMATION
     - Confirm the installation.
 
 
-## Container
-### Building the base container
-We define the base container using Ubuntu named `ubuntu_22.04.def` and build it as follows:
+## Building the container
+First we build the base container which installs `xorg` and supported versions of `gcc` and `gfortran` compilers.
+We use Ubuntu as the base and build it as follows:
 
 ```bash
-apptainer build build/ubuntu_22.04.sif container/ubuntu_22.04.def
+apptainer build container/ubuntu_22.04.sif container/ubuntu_22.04.def
 ```
 
-
-### Building the matlab container
+Next, we can build the MATLAB container as follows:
 
 ```bash
 apptainer build matlab/container/r2023b.sif matlab/container/r2023b.def
 ```
 
-
-### Run and test the container
-Finally, we can run the container.
+You can test the container as follows:
 
 ```bash
-export MATLAB="/opt/matlab"
-apptainer exec build/r2023b.sif bash
+apptainer test matlab/container/r2023b.sif
 ```
 
-We can test matlab by running the following commands
+
+## Using the container
 
 ```bash
-$MATLAB/bin/matlab -nodisplay -nodesktop -nojvm -r "ver; quit;"
+apptainer exec matlab/container/r2023b.sif /opt/matlab/bin/matlab
 ```

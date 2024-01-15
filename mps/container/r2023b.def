@@ -1,10 +1,12 @@
 Bootstrap: localimage
 From: ./base/ubuntu_22.04.sif
 
-# Copy the matlab installation files
 %files
     ./mps/build/r2023b /opt/matlab
     ./mps/container/mpiLibConf.m /opt/matlab/toolbox/local/mpiLibConf.m
 
 %post
     chmod -R u=rwX,g=rX,o=rX /opt/matlab
+
+%test
+    /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'
