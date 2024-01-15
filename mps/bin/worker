@@ -4,10 +4,5 @@
 export MATLAB="/opt/matlab"
 export SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
 
-if [ "$1" = "-parallel" ]; then
-    export MDCE_PARALLEL=1
-    shift
-fi
-
 # Call matlab with the right arguments
-apptainer_wrapper exec "$MATLAB/bin/matlab" -parallelserver -nodisplay -r distcomp_evaluate_filetask "$@"
+/appl/opt/csc-cli-utils/bin/apptainer_wrapper exec "$MATLAB/bin/worker" "$@"

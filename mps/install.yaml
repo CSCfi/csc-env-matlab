@@ -19,14 +19,6 @@
         - "matlab/mps/{{ matlab_version }}"
         - "matlab/mps/{{ matlab_version }}/bin"
 
-    - name: "Copy the installation"
-      ansible.builtin.copy:
-        src: "{{ playbook_dir }}/container/{{ matlab_version}}.sif"
-        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/matlab.sif"
-        mode: "ug=rwx,o=rx"
-        group: "{{ group }}"
-        #checksum: "sha256:562828204cf87633f09cdca8e34a424247bad223d6cd6d8ca65e1bc84dbc041e"
-
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/bin/{{ item }}"
@@ -53,3 +45,11 @@
         dest: "{{ modulefiles_dir }}/mps/{{ matlab_version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
+
+    - name: "Copy the installation"
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/container/{{ matlab_version}}.sif"
+        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/matlab.sif"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+        checksum: "sha256:562828204cf87633f09cdca8e34a424247bad223d6cd6d8ca65e1bc84dbc041e"
