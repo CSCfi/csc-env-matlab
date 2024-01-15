@@ -1,9 +1,11 @@
 Bootstrap: docker
 From: ubuntu:22.04
 
-# Matlab requires xorg to run.
-# We also install supported compilers.
-# https://se.mathworks.com/support/requirements/supported-compilers-linux.html
+%help
+    Base container for installing MATLAB.
+    MATLAB requires `xorg` to run.
+    We also install supported version of `gcc` and `gfortran` compilers.
+    https://se.mathworks.com/support/requirements/supported-compilers-linux.html
 
 %post
     apt-get --quiet update && \
