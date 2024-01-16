@@ -4,8 +4,5 @@
 export MATLAB="/opt/matlab"
 export SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
 
-# Use the worker from the container
-export MDCE_MATLAB_EXE="$MATLAB/bin/worker"
-
 # Call matlab with the right arguments
 /appl/opt/csc-cli-utils/bin/apptainer_wrapper exec "$MATLAB/bin/mw_smpd" "$@"

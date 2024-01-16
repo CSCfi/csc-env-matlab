@@ -7,6 +7,9 @@ From: ./base/ubuntu_22.04.sif
 
 %post
     chmod -R u=rwX,g=rX,o=rX /opt/matlab
+    mkdir -p /appl/soft/math/matlab/mps
+    ln -sf /opt/matlab /appl/soft/math/matlab/r2023b
+    ln -sf /opt/matlab /appl/soft/math/matlab/mps/r2023b
 
 %test
     /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'
