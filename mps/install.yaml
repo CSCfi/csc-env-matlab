@@ -29,6 +29,8 @@
         - "matlab"
         - "mex"
         - "worker"
+        - "mw_mpiexec"
+        - "mw_smpd"
         - "matlab-cli"
         - "matlab-fix-toolbox"
 
