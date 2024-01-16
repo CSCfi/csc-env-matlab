@@ -105,3 +105,11 @@ Write the following scripts to the `matlab` file and give it execution permissio
 #!/bin/bash
 apptainer exec matlab/container/r2023b.sif /opt/matlab/bin/matlab "$@"
 ```
+
+On CSC's Puhti cluster, we can use the `apptainer_wrapper` which automatically bind mounts the cluster specific directories to the container.
+
+```bash
+#!/bin/bash
+export SING_IMAGE=<dir>/r2023b.sif  # path to the container
+apptainer_wrapper exec /opt/matlab/bin/matlab "$@"
+```
