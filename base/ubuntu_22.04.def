@@ -2,10 +2,9 @@ Bootstrap: docker
 From: ubuntu:22.04
 
 %help
-    Base container for installing MATLAB.
+    This is a base container for MATLAB installations.
     MATLAB requires `xorg` to run.
-    We also install supported version of `gcc` and `gfortran` compilers.
-    https://se.mathworks.com/support/requirements/supported-compilers-linux.html
+    We also install supported version of `gcc` and `gfortran` compilers and link them to `/bin` directory (https://se.mathworks.com/support/requirements/supported-compilers-linux.html).
 
 %post
     apt-get --quiet update && \
