@@ -4,7 +4,7 @@ Containerized installation is useful for Linux cluster environments.
 We need graphical user interface for installing MATLAB, for example, desktop or laptop computer.
 
 
-## Creating local MATLAB installation
+## Installing MATLAB on local computer
 ### Network license file
 We use a network license for the installation.
 Network license queries the license permissions from a license server
