@@ -53,4 +53,3 @@
         dest: "{{ appl_dir }}/matlab/interactive/{{ matlab_version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
-        #checksum: "sha256:b2e35b265ec065918cd459b267533bab6881fdbd48515a7e5c44f701fb699391"

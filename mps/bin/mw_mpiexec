@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# MATLAB executes this script directly, hence we load the module here.
-export MATLAB="/opt/matlab"
-export SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
-
-# Call matlab with the right arguments
-/appl/opt/csc-cli-utils/bin/apptainer_wrapper exec "$MATLAB/bin/mw_mpiexec" "$@"

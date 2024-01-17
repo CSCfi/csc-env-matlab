@@ -29,10 +29,36 @@
         - "matlab"
         - "mex"
         - "worker"
-        - "mw_mpiexec"
-        - "mw_smpd"
         - "matlab-cli"
         - "matlab-fix-toolbox"
+
+    - name: "Create directories"
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "util"
+        - "glnxa64"
+
+    - name: "Copy certain binaries from build"
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/build/{{ matlab_version }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+      loop:
+        - "mw_mpiexec"
+        - "mw_smpd"
+        - "util/arch.sh"
+        - "glnxa64/mpiexec"
+        - "glnxa64/mpiexec.hydra"
+        - "glnxa64/hydra_pmi_proxy"
+        - "glnxa64/mpiexec2"
+        - "glnxa64/smpd"
+        - "glnxa64/libssl-mw.so.3"
+        - "glnxa64/libcrypto-mw.so.3"
 
     - name: "Create a mps modulefiles directory"
       ansible.builtin.file:
@@ -54,4 +80,3 @@
         dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
-        checksum: "sha256:562828204cf87633f09cdca8e34a424247bad223d6cd6d8ca65e1bc84dbc041e"
