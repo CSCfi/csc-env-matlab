@@ -62,12 +62,12 @@ During the installation we must set the following options:
       For CSC's academic installations, we can use the `license/academic.lic` file.
 * DESTINATION
     - Select path to the installation directory.
-    - CSC's interactive installation path is `matlab/build/r2023b`
-    - CSC's parallel server installation path is `mps/build/r2023b`
+    - CSC's MATLB interactive installation path is `matlab/build/r2023b`
+    - CSC's MATLB Parallel Server installation path is `mps/build/r2023b`
 * PRODUCTS
     - Select necessary toolboxes to install.
-    - CSC's interactive installation requires *MATLAB*, *MATLAB Compiler*, *MATLAB Compiler SDK*, and *Parallel Computing Toolbox*
-    - CSC's parallel server installation requires *MATLAB* and *MATLAB Parallel Server*
+    - CSC's MATLAB interactive installation requires *MATLAB*, *MATLAB Compiler*, *MATLAB Compiler SDK*, and *Parallel Computing Toolbox* toolboxes
+    - CSC's MATLAB Parallel Server installation requires *MATLAB* and *MATLAB Parallel Server* toolboxes
 * OPTIONS
     - Unselect options to create symbolic links and sending information to matlab.
 * CONFIRMATION
@@ -108,9 +108,4 @@ apptainer exec matlab/container/r2023b.sif /opt/matlab/bin/matlab "$@"
 ```
 
 On CSC's Puhti cluster, we can use the `apptainer_wrapper` which automatically bind mounts the cluster specific directories to the container.
-
-```bash
-#!/bin/bash
-export SING_IMAGE=<dir>/r2023b.sif  # path to the container
-apptainer_wrapper exec /opt/matlab/bin/matlab "$@"
-```
+You can read about [running container in CSC clusters](https://docs.csc.fi/computing/containers/run-existing/).
