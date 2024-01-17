@@ -6,6 +6,3 @@ From: ./base/ubuntu_22.04.sif
 
 %post
     chmod -R u=rwX,g=rX,o=rX /opt/matlab
-
-%test
-    /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'

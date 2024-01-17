@@ -89,11 +89,12 @@ Next, we can build the MATLAB container as follows:
 apptainer build matlab/container/r2023b.sif matlab/container/r2023b.def
 ```
 
-The container definition also has test which run the `ver` function and exits.
-We can run it as follows as follows:
+
+## Testing the MATLAB container
+We can test the MATLAB container by running the `ver` function as follows as follows:
 
 ```bash
-apptainer test matlab/container/r2023b.sif
+apptainer exec /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'
 ```
 
 
