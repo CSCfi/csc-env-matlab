@@ -2,10 +2,11 @@
 In this repository contains intructions for creating a containerized [MATLAB](https://mathworks.com) and [MATLAB Parallel Server (MPS)](https://mathworks.com/products/matlab-parallel-server.html) installation for Linux with [Apptainer](https://apptainer.org/).
 Containerized installation is useful for Linux cluster environments.
 We need graphical user interface for installing MATLAB, for example, desktop or laptop computer.
+Currently, there are instructions for installing MATLAB version *R2023b*.
 
 
 ## Installing MATLAB on local computer
-### Network license file
+### License file
 We use a network license for the installation.
 Network license queries the license permissions from a license server
 We need a license file (such as `license.lic`) to connect to the license server with contents as follows:
