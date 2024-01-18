@@ -18,7 +18,7 @@ image = pathJoin(appl_dir, "mps", version, "matlab.sif")
 setenv("SING_IMAGE", image)
 
 -- Load message and license disclaimer
-loadmsg = "\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------\n\n MATLAB Parallel Server (MPS) is not intended to be used as a batch job and this module is for debuggin. Read more about how to use MPS from the documentation at https://docs.csc.fi/apps/matlab/"
+loadmsg = "\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------\n\nMATLAB Parallel Server (MPS) is not intended to be used as a batch job. This module is for debugging purposes. Read more about how to use MPS from the documentation at:\nhttps://docs.csc.fi/apps/matlab/"
 
 if (mode() == "load") then
   LmodMessage(loadmsg)
