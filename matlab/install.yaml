@@ -30,7 +30,7 @@
         - "mcc"
         - "mbuild"
         - "mex"
-        - "matlab-cli"
+        - "mcli"
         - "matlab-fix-toolbox"
 
     - name: "Create a matlab modulefiles directory"
