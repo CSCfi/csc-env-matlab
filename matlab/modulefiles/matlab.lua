@@ -1,3 +1,5 @@
+family("matlab")
+
 -- Version string
 version = myModuleVersion()
 
