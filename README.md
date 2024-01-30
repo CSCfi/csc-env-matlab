@@ -76,11 +76,11 @@ During the installation we must set the following options:
 
 
 ## Building the MATLAB container
-First we build the base container which installs `xorg` and supported versions of `gcc` and `gfortran` compilers.
-We use Ubuntu as the base and build it as follows:
+First we build the base container with required dependencies.
+Base container definitions are modified from the [MathWorks official container images](https://github.com/mathworks-ref-arch/container-images/).
 
 ```bash
-apptainer build base/ubuntu_22.04.sif base/ubuntu_22.04.def
+./deps/matlab/r2023b/ubuntu22.04/build.sh
 ```
 
 The matlab container definition `matlab/container/r2023b.def` copies the MATLAB installation to `/opt/matlab` directory and sets the file permissions such that the installation is available for all users.

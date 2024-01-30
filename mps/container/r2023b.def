@@ -1,5 +1,5 @@
-Bootstrap: localimage
-From: ./base/ubuntu_22.04.sif
+Bootstrap: docker-archive
+From: ./deps/matlab/r2023b/ubuntu22.04/matlab.tar
 
 %files
     ./mps/build/r2023b /opt/matlab

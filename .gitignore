@@ -2,3 +2,5 @@ build/
 installer/
 *.sha256
 *.sif
+*.tar
+*.tar.gz
