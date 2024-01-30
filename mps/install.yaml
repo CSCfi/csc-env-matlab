@@ -29,7 +29,6 @@
         - "matlab"
         - "mex"
         - "worker"
-        - "mcli"
         - "matlab-fix-toolbox"
 
     - name: "Create directories"
