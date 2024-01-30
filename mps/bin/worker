@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# MATLAB executes this script directly, hence we load the module here.
+# MATLAB executes this script directly.
 export MATLAB="/opt/matlab"
 export SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
+
+# Enable Nvidia GPU support
+export SING_FLAGS="--nv"
 
 # Call matlab with the right arguments
 /appl/opt/csc-cli-utils/bin/apptainer_wrapper exec "$MATLAB/bin/worker" "$@"
