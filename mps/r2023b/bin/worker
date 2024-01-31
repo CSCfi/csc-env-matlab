@@ -8,4 +8,4 @@ export SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
 export SING_FLAGS="--nv"
 
 # Call matlab with the right arguments
-/appl/opt/csc-cli-utils/bin/apptainer_wrapper exec "$MATLAB/bin/worker" "$@"
+apptainer_wrapper exec "$MATLAB/bin/worker" "$@"
