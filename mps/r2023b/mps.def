@@ -2,8 +2,8 @@ Bootstrap: docker-archive
 From: ./deps/matlab/r2023b/ubuntu22.04/matlab.tar
 
 %files
-    ./mps/build/r2023b /opt/matlab
-    ./mps/container/mpiLibConf.m /opt/matlab/toolbox/local/mpiLibConf.m
+    ./mps/r2023b/build /opt/matlab
+    ./mps/r2023b/mpiLibConf.m /opt/matlab/toolbox/local/mpiLibConf.m
 
 %post
     chmod -R u=rwX,g=rX,o=rX /opt/matlab

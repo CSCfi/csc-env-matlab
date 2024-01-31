@@ -21,7 +21,7 @@
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/{{ matlab_version }}/bin/{{ item }}"
         dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
@@ -43,7 +43,7 @@
 
     - name: "Copy certain binaries from build"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/build/{{ matlab_version }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/{{ matlab_version }}/build/bin/{{ item }}"
         dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
@@ -68,14 +68,14 @@
 
     - name: "Copy the modulefile"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/modulefiles/mps.lua"
+        src: "{{ playbook_dir }}/{{ matlab_version }}/mps.lua"
         dest: "{{ modulefiles_dir }}/mps/{{ matlab_version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
     - name: "Copy the installation"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/container/{{ matlab_version}}.sif"
+        src: "{{ playbook_dir }}/{{ matlab_version}}/mps.sif"
         dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
