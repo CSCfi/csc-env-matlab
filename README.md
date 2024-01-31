@@ -47,8 +47,7 @@ Create installation directory and install matlab using the graphical installer t
 
 ```bash
 # Create the installation directory.
-# We can install MPS by changing the path to `mps/build/r2023b`.
-mkdir -p matlab/build/r2023b
+mkdir -p matlab/r2023b/build
 
 # Run the installer
 ./installer/r2023b/install
@@ -63,8 +62,8 @@ During the installation we must set the following options:
       For CSC's academic installations, we can use the `license/academic.lic` file.
 * DESTINATION
     - Select path to the installation directory.
-    - CSC's MATLB interactive installation path is `matlab/build/r2023b`
-    - CSC's MATLB Parallel Server installation path is `mps/build/r2023b`
+    - CSC's MATLB interactive installation path is `matlab/r2023b/build`
+    - CSC's MATLB Parallel Server installation path is `mps/r2023b/build`
 * PRODUCTS
     - Select necessary toolboxes to install.
     - CSC's MATLAB interactive installation requires *MATLAB*, *MATLAB Compiler*, *MATLAB Compiler SDK*, and *Parallel Computing Toolbox* toolboxes
@@ -87,7 +86,7 @@ The matlab container definition `matlab/container/r2023b.def` copies the MATLAB 
 Next, we can build the MATLAB container as follows:
 
 ```bash
-apptainer build matlab/container/r2023b.sif matlab/container/r2023b.def
+apptainer build matlab/r2023b/matlab.sif matlab/r2023b/matlab.def
 ```
 
 
@@ -95,7 +94,7 @@ apptainer build matlab/container/r2023b.sif matlab/container/r2023b.def
 We can test the MATLAB container by running the `ver` function as follows as follows:
 
 ```bash
-apptainer exec matlab/container/r2023b.sif /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'
+apptainer exec matlab/r2023b/matlab.sif /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'
 ```
 
 
@@ -105,7 +104,7 @@ Write the following scripts to the `matlab` file and give it execution permissio
 
 ```bash
 #!/bin/bash
-apptainer exec matlab/container/r2023b.sif /opt/matlab/bin/matlab "$@"
+apptainer exec matlab/r2023b/matlab.sif /opt/matlab/bin/matlab "$@"
 ```
 
 On CSC's Puhti cluster, we can use the `apptainer_wrapper` which automatically bind mounts the cluster specific directories to the container.
