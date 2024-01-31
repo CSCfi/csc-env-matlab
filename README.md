@@ -8,7 +8,7 @@ Currently, there are instructions for installing MATLAB version *R2023b*.
 ## Installing MATLAB on local computer
 ### License file
 We use a network license for the installation.
-Network license queries the license permissions from a license server
+Network license queries the license permissions from a license server.
 We need a license file (such as `license.lic`) to connect to the license server with contents as follows:
 
 ```text
