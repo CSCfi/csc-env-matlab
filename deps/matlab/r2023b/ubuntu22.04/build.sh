@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "${0%/*}"  # directory of the script
-sudo docker build --tag "matlab:r2023b-ubuntu22.04" .
-sudo docker save --output "matlab.tar" "matlab:r2023b-ubuntu22.04"
+
+# directory of the script
+cd "${0%/*}"
+
+# Build the container
+sudo docker build --tag "ghcr.io/cscfi/matlab:r2023b-ubuntu22.04" .
+
+# Login to GitHub container registry
+# Prompts for an access token
+sudo docker login -u cscfi ghcr.io
+
+# Push the container
+sudo docker push "ghcr.io/cscfi/matlab:r2023b-ubuntu22.04"

@@ -75,15 +75,10 @@ During the installation we must set the following options:
 
 
 ## Building the MATLAB container
-First we build the base container with required dependencies.
+We build the container on top of a base container that contains the required dependencies to run MATLAB.
 Base container definitions are modified from the [MathWorks official container images](https://github.com/mathworks-ref-arch/container-images/).
-
-```bash
-./deps/matlab/r2023b/ubuntu22.04/build.sh
-```
-
-The matlab container definition `matlab/container/r2023b.def` copies the MATLAB installation to `/opt/matlab` directory and sets the file permissions such that the installation is available for all users.
-Next, we can build the MATLAB container as follows:
+The MATLAB container definition copies the MATLAB installation to `/opt/matlab` directory and sets the file permissions such that the installation is available for all users.
+We can build the MATLAB container as follows:
 
 ```bash
 apptainer build matlab/r2023b/matlab.sif matlab/r2023b/matlab.def
@@ -91,7 +86,7 @@ apptainer build matlab/r2023b/matlab.sif matlab/r2023b/matlab.def
 
 
 ## Testing the MATLAB container
-We can test the MATLAB container by running the `ver` function as follows as follows:
+We can test the MATLAB container by running the `ver` function as follows:
 
 ```bash
 apptainer exec matlab/r2023b/matlab.sif /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'
