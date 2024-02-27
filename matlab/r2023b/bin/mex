@@ -1,2 +1,2 @@
 #!/bin/bash
-apptainer_wrapper exec "$MATLAB/bin/mex" "$@"
+apptainer_wrapper exec mex "$@"
