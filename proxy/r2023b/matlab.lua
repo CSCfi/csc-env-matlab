@@ -14,7 +14,7 @@ prepend_path("PATH", bin_dir)
 -- It is the path where matlab is mounted inside to the container.
 matlab = "/opt/matlab"
 setenv("MATLAB", matlab)
-prepend_path("MATLABPATH", matlab)
+--prepend_path("MATLABPATH", matlab)
 
 -- Add binaries inside the MATLAB container to path
 matlab_bin = "/opt/matlab/bin"
