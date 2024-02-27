@@ -89,7 +89,7 @@ apptainer build matlab/r2023b/matlab.sif matlab/r2023b/matlab.def
 We can test the MATLAB container by running the `ver` function as follows:
 
 ```bash
-apptainer exec matlab/r2023b/matlab.sif /opt/matlab/bin/matlab -nodisplay -r 'ver; quit;'
+apptainer exec matlab/r2023b/matlab.sif matlab -nodisplay -r 'ver; quit;'
 ```
 
 
