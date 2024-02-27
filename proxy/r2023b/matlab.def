@@ -6,3 +6,7 @@ From: ghcr.io/cscfi/matlab-proxy:r2023b-ubuntu22.04
 
 %post
     chmod -R u=rwX,g=rX,o=rX /opt/matlab
+
+%environment
+    export MATLAB=/opt/matlab
+    export PATH="/opt/matlab/bin:$PATH"
