@@ -29,7 +29,6 @@
         - "matlab"
         - "mex"
         - "worker"
-        - "matlab-fix-toolbox"
 
     - name: "Create directories"
       ansible.builtin.file:

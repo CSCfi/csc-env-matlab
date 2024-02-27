@@ -1,3 +1,0 @@
-#!/bin/bash
-# Fixes errors about missing toolboxes
-matlab -nodisplay -nodesktop -nojvm -r "restoredefaultpath; rehash toolboxcache; savepath; quit;"
