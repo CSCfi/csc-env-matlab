@@ -13,6 +13,4 @@ prepend_path("PATH", bin_dir)
 -- Path to the matlab container image run using `apptainer_wrapper`.
 image = pathJoin(appl_dir, "proxy", version, "matlab.sif")
 setenv("SING_IMAGE", image)
---flags = "--bind /run --bind=/usr/lib64/libmunge.so.2:/lib/x86_64-linux-gnu/libmunge.so.2,/var/run/munge"
-flags = "--bind /run"
-setenv("SING_FLAGS", flags)
+setenv("SING_FLAGS", "-B /run")
