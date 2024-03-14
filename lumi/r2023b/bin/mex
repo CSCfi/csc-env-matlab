@@ -1,2 +1,2 @@
 #!/bin/bash
-singularity exec "$SING_IMAGE" "$SING_FLAGS" mex "$@"
+singularity exec "$SING_FLAGS" "$SING_IMAGE" mex "$@"
