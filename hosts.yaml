@@ -1,4 +1,3 @@
-# Localhost for testing
 group_localhost:
   hosts:
     localhost:
@@ -8,8 +7,6 @@ group_localhost:
     group: "csc"
     appl_dir: "{{ ansible_env.HOME }}/scratch/appl/soft/math"
     modulefiles_dir: "{{ ansible_env.HOME}}/scratch/appl/modulefiles"
-
-# Puhti installation
 group_puhti:
   hosts:
     puhti-login13.csc.fi:
@@ -20,3 +17,12 @@ group_puhti:
     group: "p_installation"
     appl_dir: "/appl/soft/math"
     modulefiles_dir: "/appl/modulefiles"
+group_lumi:
+  hosts:
+    lumi-uan04.csc.fi:
+      ansible_connection: "ssh"
+      ansible_python_interpreter: "/opt/cray/pe/python/3.9.13.1/bin/python3.9"
+  vars:
+    group: "appl_csc"
+    appl_dir: "/appl/local/csc/soft/math"
+    modulefiles_dir: "/appl/local/csc/modulefiles"
