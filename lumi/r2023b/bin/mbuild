@@ -1,0 +1,2 @@
+#!/bin/bash
+singularity exec "$SING_IMAGE" "$SING_FLAGS" mbuild "$@"
