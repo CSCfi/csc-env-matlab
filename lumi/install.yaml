@@ -26,6 +26,7 @@
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
+        - "singularity_exec"
         - "matlab"
         - "mcc"
         - "mbuild"

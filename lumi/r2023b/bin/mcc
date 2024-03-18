@@ -1,2 +1,2 @@
 #!/bin/bash
-singularity exec  "$SING_FLAGS""$SING_IMAGE" mcc "$@"
+singularity_exec mcc "$@"

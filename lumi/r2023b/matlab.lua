@@ -12,5 +12,4 @@ prepend_path("PATH", bin_dir)
 
 -- Path to the matlab container image run using `apptainer_wrapper`.
 image = pathJoin(appl_dir, "interactive", version, "matlab.sif")
-setenv("SING_IMAGE", image)
-setenv("SING_FLAGS", "-B /run")
+setenv("MATLAB_SING_IMAGE", image)
