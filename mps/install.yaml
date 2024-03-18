@@ -79,3 +79,5 @@
         dest: "{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
+      tags:
+        - "large"

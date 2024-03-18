@@ -48,3 +48,5 @@
         dest: "{{ appl_dir }}/matlab/proxy/{{ matlab_version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
+      tags:
+        - "large"

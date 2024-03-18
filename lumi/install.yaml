@@ -52,3 +52,49 @@
         dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
+      tags:
+        - "large"
+
+- name: "Synchronize across LUMI Lustres"
+  hosts:
+    - "group_lumi"
+  become: false
+  vars:
+    version: "r2023b"
+
+  tasks:
+    - name: "Create a matlab application directory"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "/pfs/lustrep2/{{ appl_dir }}/matlab"
+        - "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive"
+        - "/pfs/lustrep3/{{ appl_dir }}/matlab"
+        - "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
+        - "/pfs/lustrep4/{{ appl_dir }}/matlab"
+        - "/pfs/lustrep4/{{ appl_dir }}/matlab/interactive"
+
+    - name: "Synchronize installation"
+      ansible.builtin.command: |
+        rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
+      loop:
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+          dest: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive"
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+          dest: "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+          dest: "/pfs/lustrep4/{{ appl_dir }}/matlab/interactive"
+
+    - name: "Synchronize modulefiles"
+      ansible.builtin.command: |
+        rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
+      loop:
+        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab"
+          dest: "/pfs/lustrep2/{{ modulefiles_dir }}"
+        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab"
+          dest: "/pfs/lustrep3/{{ modulefiles_dir }}"
+        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab"
+          dest: "/pfs/lustrep4/{{ modulefiles_dir }}"

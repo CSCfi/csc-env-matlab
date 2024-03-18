@@ -52,3 +52,5 @@
         dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
+      tags:
+        - "large"
