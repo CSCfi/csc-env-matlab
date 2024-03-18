@@ -1,2 +1,2 @@
 #!/bin/bash
-apptainer_wrapper exec mex "$@"
+apptainer_exec mex "$@"

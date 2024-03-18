@@ -1,2 +1,2 @@
 #!/bin/bash
-apptainer_wrapper exec matlab "$@"
+apptainer_exec matlab "$@"

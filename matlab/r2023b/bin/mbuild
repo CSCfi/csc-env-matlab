@@ -1,2 +1,2 @@
 #!/bin/bash
-apptainer_wrapper exec mbuild "$@"
+apptainer_exec mbuild "$@"

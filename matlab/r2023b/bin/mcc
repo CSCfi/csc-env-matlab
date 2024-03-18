@@ -1,2 +1,2 @@
 #!/bin/bash
-apptainer_wrapper exec mcc "$@"
+apptainer_exec mcc "$@"

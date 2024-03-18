@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Bind common CSC environment directories
+SING_FLAGS="-B /users:/users -B /projappl:/projappl -B /scratch:/scratch $SING_FLAGS"
+
+# Bind TMPDIR if it is set and directory exists
+if [ -d "$TMPDIR" ]; then
+    SING_FLAGS="$SING_FLAGS -B $TMPDIR:$TMPDIR"
+fi
+
+# Bind LOCAL_SCRATCH if it is set and directory exists
+if [ -d "$LOCAL_SCRATCH" ]; then
+    SING_FLAGS="$SING_FLAGS -B $LOCAL_SCRATCH:$LOCAL_SCRATCH"
+fi
+
+# Bind /fmi if it is set and directory exists
+if [ -d "/fmi" ]; then
+    SING_FLAGS="$SING_FLAGS -B /fmi:/fmi"
+fi
+
+# Bind /appl/data
+if [ -d "/appl/data" ]; then
+    SING_FLAGS="$SING_FLAGS -B /appl/data:/appl/data"
+fi
+
+# Bind /run
+SING_FLAGS="$SING_FLAGS -B /run:/run"
+
+# Apptainer exec
+apptainer --silent exec "$SING_FLAGS" "$SING_IMAGE" "$@"
