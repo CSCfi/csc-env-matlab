@@ -26,6 +26,9 @@ fi
 # Bind /run which is required by MATLAB
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /run:/run"
 
+# Enable Nvidia GPUs
+MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS --nv"
+
 # Apptainer exec (allow word splitting for MATLAB_SING_FLAGS)
 # shellcheck disable=SC2086
 apptainer --silent exec $MATLAB_SING_FLAGS "$MATLAB_SING_IMAGE" matlab-proxy-app
