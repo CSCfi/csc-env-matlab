@@ -10,7 +10,7 @@ appl_dir = "/appl/soft/math/matlab"
 bin_dir = pathJoin(appl_dir, "mps", version, "bin")
 prepend_path("PATH", bin_dir)
 
--- Path to the matlab container run with `apptainer_wrapper`.
+-- Path to the matlab container image to run using apptainer or singularity.
 image = pathJoin(appl_dir, "mps", version, "matlab.sif")
 setenv("MATLAB_SING_IMAGE", image)
 
