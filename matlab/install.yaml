@@ -4,7 +4,7 @@
     - "group_puhti"
   become: false
   vars:
-    matlab_version: "r2023b"
+    version: "r2023b"
 
   tasks:
     - name: "Create a matlab application directory"
@@ -16,16 +16,17 @@
       loop:
         - "matlab"
         - "matlab/interactive"
-        - "matlab/interactive/{{ matlab_version }}"
-        - "matlab/interactive/{{ matlab_version }}/bin"
+        - "matlab/interactive/{{ version }}"
+        - "matlab/interactive/{{ version }}/bin"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/interactive/{{ matlab_version }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
+        - "apptainer_exec"
         - "matlab"
         - "mcc"
         - "mbuild"
@@ -40,14 +41,14 @@
 
     - name: "Copy the modulefile"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/matlab.lua"
-        dest: "{{ modulefiles_dir }}/matlab/{{ matlab_version }}.lua"
+        src: "{{ playbook_dir }}/{{ version }}/matlab.lua"
+        dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
     - name: "Copy the installation"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/matlab.sif"
-        dest: "{{ appl_dir }}/matlab/interactive/{{ matlab_version }}/matlab.sif"
+        src: "{{ playbook_dir }}/{{ version }}/matlab.sif"
+        dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"

@@ -23,7 +23,7 @@ if [ -d "/appl/data" ]; then
     SING_FLAGS="$SING_FLAGS -B /appl/data:/appl/data"
 fi
 
-# Bind /run
+# Bind /run which is required by MATLAB
 SING_FLAGS="$SING_FLAGS -B /run:/run"
 
 # Apptainer exec
