@@ -4,7 +4,7 @@
     - "group_puhti"
   become: false
   vars:
-    matlab_version: "r2023b"
+    version: "r2023b"
 
   tasks:
     - name: "Create a mps application directory"
@@ -16,23 +16,24 @@
       loop:
         - "matlab"
         - "matlab/mps"
-        - "matlab/mps/{{ matlab_version }}"
-        - "matlab/mps/{{ matlab_version }}/bin"
+        - "matlab/mps/{{ version }}"
+        - "matlab/mps/{{ version }}/bin"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
+        - "apptainer_exec"
         - "matlab"
         - "mex"
         - "worker"
 
     - name: "Create directories"
       ansible.builtin.file:
-        path: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
+        path: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
         state: "directory"
         mode: "ug=rwx,o=rx,g+s"
         group: "{{ group }}"
@@ -42,8 +43,8 @@
 
     - name: "Copy certain binaries from build"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/build/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/{{ version }}/build/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
@@ -67,14 +68,14 @@
 
     - name: "Copy the modulefile"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/matlab.lua"
-        dest: "{{ modulefiles_dir }}/mps/{{ matlab_version }}.lua"
+        src: "{{ playbook_dir }}/{{ version }}/matlab.lua"
+        dest: "{{ modulefiles_dir }}/mps/{{ version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
     - name: "Copy the installation"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version}}/matlab.sif"
-        dest: "{{ appl_dir }}/matlab/mps/{{ matlab_version }}/matlab.sif"
+        src: "{{ playbook_dir }}/{{ version}}/matlab.sif"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"

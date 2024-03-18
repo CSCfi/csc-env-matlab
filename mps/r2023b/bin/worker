@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # MATLAB executes this script directly.
-export SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
+export MATLAB_SING_IMAGE="/appl/soft/math/matlab/mps/r2023b/matlab.sif"
 
 # Enable Nvidia GPU support
-export SING_FLAGS="--nv"
+export MATLAB_SING_FLAGS="--nv"
 
 # Call matlab with the right arguments
-/appl/opt/csc-cli-utils/bin/apptainer_wrapper exec worker "$@"
+/appl/soft/math/matlab/mps/r2023b/bin/apptainer_exec worker "$@"
