@@ -4,3 +4,4 @@ installer/
 *.sif
 *.tar
 *.tar.gz
+.tmp/

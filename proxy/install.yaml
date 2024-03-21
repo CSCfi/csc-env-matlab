@@ -3,8 +3,6 @@
     - "group_localhost"
     - "group_puhti"
   become: false
-  vars:
-    matlab_version: "r2023b"
 
   tasks:
     - name: "Create a matlab application directory"
@@ -16,13 +14,13 @@
       loop:
         - "matlab"
         - "matlab/proxy"
-        - "matlab/proxy/{{ matlab_version }}"
-        - "matlab/proxy/{{ matlab_version }}/bin"
+        - "matlab/proxy/{{ version }}"
+        - "matlab/proxy/{{ version }}/bin"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/proxy/{{ matlab_version }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/proxy/{{ version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
@@ -37,15 +35,15 @@
 
     - name: "Copy the modulefile"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/matlab.lua"
-        dest: "{{ modulefiles_dir }}/matlab-proxy/{{ matlab_version }}.lua"
+        src: "{{ playbook_dir }}/{{ version }}/matlab.lua"
+        dest: "{{ modulefiles_dir }}/matlab-proxy/{{ version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
     - name: "Copy the installation"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ matlab_version }}/matlab.sif"
-        dest: "{{ appl_dir }}/matlab/proxy/{{ matlab_version }}/matlab.sif"
+        src: "{{ playbook_dir }}/{{ version }}/matlab.sif"
+        dest: "{{ appl_dir }}/matlab/proxy/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       tags:
