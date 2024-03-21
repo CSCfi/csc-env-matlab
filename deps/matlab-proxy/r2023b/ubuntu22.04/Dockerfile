@@ -9,7 +9,7 @@ RUN apt-get update -y && apt-get install -y xvfb \
     && apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 # Do not add user site-packages directory to sys.path
-ENV PYTHONNOUSERSITE=""
+ENV PYTHONNOUSERSITE="1"
 
 # Install matlab-proxy
 RUN python3 -m pip install matlab-proxy
