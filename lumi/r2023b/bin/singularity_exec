@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Bind common CSC environment directories
-MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /pfs:/pfs -B /users:/users -B /projappl:/projappl -B /scratch:/scratch"
+MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /pfs:/pfs -B /users:/users -B /projappl:/projappl -B /scratch:/scratch -B /project:/project"
 
 # Bind TMPDIR if it is set and directory exists
 if [ -d "$TMPDIR" ]; then
