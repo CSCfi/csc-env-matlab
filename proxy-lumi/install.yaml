@@ -1,7 +1,7 @@
 - name: "Install matlab-proxy environment"
   hosts:
     - "group_localhost"
-    - "group_puhti"
+    - "group_lumi"
   become: false
 
   tasks:
@@ -24,7 +24,7 @@
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
-        - "apptainer_exec"
+        - "singularity_exec"
         - "matlab-proxy-app"
 
     - name: "Create a matlab modulefiles directory"
