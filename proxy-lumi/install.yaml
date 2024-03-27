@@ -49,3 +49,47 @@
         group: "{{ group }}"
       tags:
         - "large"
+
+- name: "Synchronize across LUMI Lustres"
+  hosts:
+    - "group_lumi"
+  become: false
+  vars:
+    version: "r2023b"
+
+  tasks:
+    - name: "Create a matlab application directory"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "/pfs/lustrep2/{{ appl_dir }}/matlab"
+        - "/pfs/lustrep2/{{ appl_dir }}/matlab/proxy"
+        - "/pfs/lustrep3/{{ appl_dir }}/matlab"
+        - "/pfs/lustrep3/{{ appl_dir }}/matlab/proxy"
+        - "/pfs/lustrep4/{{ appl_dir }}/matlab"
+        - "/pfs/lustrep4/{{ appl_dir }}/matlab/proxy"
+
+    - name: "Synchronize installation"
+      ansible.builtin.command: |
+        rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
+      loop:
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+          dest: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive"
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+          dest: "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+          dest: "/pfs/lustrep4/{{ appl_dir }}/matlab/interactive"
+
+    - name: "Synchronize modulefiles"
+      ansible.builtin.command: |
+        rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
+      loop:
+        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab-proxy"
+          dest: "/pfs/lustrep2/{{ modulefiles_dir }}"
+        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab-proxy"
+          dest: "/pfs/lustrep3/{{ modulefiles_dir }}"
+        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab-proxy"
+          dest: "/pfs/lustrep4/{{ modulefiles_dir }}"
