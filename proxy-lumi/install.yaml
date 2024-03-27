@@ -76,12 +76,12 @@
       ansible.builtin.command: |
         rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
       loop:
-        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
-          dest: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive"
-        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
-          dest: "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
-        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
-          dest: "/pfs/lustrep4/{{ appl_dir }}/matlab/interactive"
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/proxy/{{ version }}"
+          dest: "/pfs/lustrep2/{{ appl_dir }}/matlab/proxy"
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/proxy/{{ version }}"
+          dest: "/pfs/lustrep3/{{ appl_dir }}/matlab/proxy"
+        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/proxy/{{ version }}"
+          dest: "/pfs/lustrep4/{{ appl_dir }}/matlab/proxy"
 
     - name: "Synchronize modulefiles"
       ansible.builtin.command: |
