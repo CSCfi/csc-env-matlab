@@ -8,7 +8,7 @@ USAGE
     install.sh <systemname> <target> <version>
 
 EXAMPLES
-    Install MATLAB version r2023b to Puhti:
+    # Install MATLAB version r2023b to Puhti:
 
     install.sh puhti matlab r2023b
 "
