@@ -1,4 +1,4 @@
-# Copyright 2023 The MathWorks, Inc.
+# Copyright 2024 The MathWorks, Inc.
 FROM ubuntu:22.04
 
 LABEL maintainer="The MathWorks"
@@ -46,3 +46,23 @@ RUN apt-get update -y && apt-get install --no-install-recommends -y libgstreamer
 
 # Uncomment to resolve any license manager issues
 #RUN ln -s /lib64/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
+
+# Install dependencies for matlab-proxy
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get --yes update && \
+    apt-get --yes upgrade && \
+    apt-get --yes install \
+        xvfb \
+        python3 \
+        python3-pip \
+        && \
+    apt-get --yes clean && \
+    apt-get --yes autoremove && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install matlab-proxy
+RUN python3 -m pip install --no-cache-dir --upgrade pip && \
+    python3 -m pip install --no-cache-dir matlab-proxy
+
+# Do not add user site-packages directory to sys.path
+ENV PYTHONNOUSERSITE="1"
