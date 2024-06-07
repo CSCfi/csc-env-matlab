@@ -3,8 +3,6 @@
     - "group_localhost"
     - "group_lumi"
   become: false
-  vars:
-    version: "r2023b"
 
   tasks:
     - name: "Create a matlab application directory"
@@ -31,6 +29,7 @@
         - "mcc"
         - "mbuild"
         - "mex"
+        - "matlab-proxy-app"
 
     - name: "Create a matlab modulefiles directory"
       ansible.builtin.file:
@@ -59,8 +58,6 @@
   hosts:
     - "group_lumi"
   become: false
-  vars:
-    version: "r2023b"
 
   tasks:
     - name: "Create a matlab application directory"
