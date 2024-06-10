@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ghcr.io/cscfi/matlab:r2023b-ubuntu22.04
+From: ghcr.io/cscfi/matlab:r2024a-ubuntu22.04
 
 %files
     build /opt/matlab
