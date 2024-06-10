@@ -29,6 +29,14 @@
         - "apptainer_exec"
         - "matlab"
         - "mex"
+
+    - name: "Copy the wrapper script templates"
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}.j2"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+      loop:
         - "worker"
 
     - name: "Create directories"
