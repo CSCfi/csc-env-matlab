@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Increase the maximum size of virtual memory
+ulimit -v 20971520
+
 # Bind common CSC environment directories
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /users:/users -B /projappl:/projappl -B /scratch:/scratch"
 

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Increase the maximum size of virtual memory
+ulimit -v 20971520
+
 # MATLAB executes this script directly.
 export MATLAB_SING_IMAGE="/appl/soft/math/matlab/mps/{{ version }}/matlab.sif"
 
