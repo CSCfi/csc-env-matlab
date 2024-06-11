@@ -56,7 +56,7 @@
 
     - name: "Link matlab-proxy to matlab for ood-matlab-html"
       ansible.builtin.file:
-        src: "{{ modulefiles_dir }}/matlab"
+        src: "mps"
         dest: "{{ modulefiles_dir }}/matlab-proxy"
         state: "link"
         group: "{{ group }}"

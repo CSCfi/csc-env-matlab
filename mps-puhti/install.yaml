@@ -89,3 +89,10 @@
         group: "{{ group }}"
       tags:
         - "large"
+
+    - name: "Link matlab-proxy to matlab for ood-matlab-html"
+      ansible.builtin.file:
+        src: "matlab"
+        dest: "{{ modulefiles_dir }}/matlab-parallel-server"
+        state: "link"
+        group: "{{ group }}"
