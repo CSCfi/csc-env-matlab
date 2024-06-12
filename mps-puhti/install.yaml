@@ -29,6 +29,7 @@
         - "apptainer_exec"
         - "matlab"
         - "mex"
+        - "matlab-proxy-app"
 
     - name: "Copy the wrapper script templates"
       ansible.builtin.template:
