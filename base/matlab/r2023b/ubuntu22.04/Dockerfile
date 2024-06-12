@@ -62,7 +62,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 # Install matlab-proxy
 RUN python3 -m pip install --no-cache-dir --upgrade pip && \
-    python3 -m pip install --no-cache-dir matlab-proxy
+    python3 -m pip install --no-cache-dir matlab-proxy==0.18.1
 
 # Do not add user site-packages directory to sys.path
 ENV PYTHONNOUSERSITE="1"
