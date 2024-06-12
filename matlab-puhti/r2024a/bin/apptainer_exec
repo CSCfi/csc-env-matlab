@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Increase the maximum size of virtual memory
-ulimit -v 20971520
+# Set the maximum size of virtual memory to the minimum limit if it is less than it.
+CUR_LIMIT=$(ulimit -v)
+MIN_LIMIT=20971520
+if [ "$CUR_LIMIT" != "unlimited" ] && [ "$CUR_LIMIT" -lt "$MIN_LIMIT" ]; then
+    ulimit -v "$MIN_LIMIT"
+fi
 
 # Bind common CSC environment directories
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /users:/users -B /projappl:/projappl -B /scratch:/scratch"
