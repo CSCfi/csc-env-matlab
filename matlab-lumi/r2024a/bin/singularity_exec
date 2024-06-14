@@ -13,6 +13,9 @@ if [ -d "$LOCAL_SCRATCH" ]; then
     MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B $LOCAL_SCRATCH:$LOCAL_SCRATCH"
 fi
 
+# Block MATLAB from installing ServiceHost (700 MB with 10k files per host).
+MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /dev/null:$HOME/.MathWorks/ServiceHost"
+
 # Bind /run which is required by MATLAB
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /run:/run"
 

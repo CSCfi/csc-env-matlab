@@ -33,7 +33,7 @@ fi
 # Bind /run which is required by MATLAB
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /run:/run"
 
-# Hack block MATLAB from implicitly installing ServiceHost (700 MB with 10k files per host).
+# Block MATLAB from installing ServiceHost (700 MB with 10k files per host).
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /dev/null:$HOME/.MathWorks/ServiceHost"
 
 # Enable Nvidia GPUs
