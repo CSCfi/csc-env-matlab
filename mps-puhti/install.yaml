@@ -70,7 +70,7 @@
 
     - name: "Create a mps modulefiles directory"
       ansible.builtin.file:
-        path: "{{ modulefiles_dir }}/mps"
+        path: "{{ modulefiles_dir }}/matlab-parallel-server"
         state: "directory"
         mode: "ug=rwx,o=rx,g+s"
         group: "{{ group }}"
@@ -78,7 +78,7 @@
     - name: "Copy the modulefile"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/{{ version }}/matlab.lua"
-        dest: "{{ modulefiles_dir }}/mps/{{ version }}.lua"
+        dest: "{{ modulefiles_dir }}/matlab-parallel-server/{{ version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
@@ -90,10 +90,3 @@
         group: "{{ group }}"
       tags:
         - "large"
-
-    - name: "Link matlab-proxy to matlab for ood-matlab-html"
-      ansible.builtin.file:
-        src: "matlab"
-        dest: "{{ modulefiles_dir }}/matlab-parallel-server"
-        state: "link"
-        group: "{{ group }}"

@@ -2,7 +2,7 @@ Bootstrap: docker
 From: ghcr.io/cscfi/matlab:r2023b-ubuntu22.04
 
 %files
-    ./matlab-lumi/r2023b/build /opt/matlab
+    build /opt/matlab
 
 %post
     chmod -R u=rwX,g=rX,o=rX /opt/matlab

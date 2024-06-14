@@ -1,2 +1,0 @@
-#!/bin/bash
-singularity_exec mcc "$@"
