@@ -65,8 +65,8 @@
         mode: "ug=rwx,o=rx,g+s"
         group: "{{ group }}"
       loop:
-        - "/pfs/lustrep2/{{ appl_dir }}/matlab"
-        - "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive"
+        - "/pfs/lustrep1/{{ appl_dir }}/matlab"
+        - "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive"
         - "/pfs/lustrep3/{{ appl_dir }}/matlab"
         - "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
         - "/pfs/lustrep4/{{ appl_dir }}/matlab"
@@ -76,20 +76,20 @@
       ansible.builtin.command: |
         rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
       loop:
-        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
-          dest: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive"
-        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive/{{ version }}"
+          dest: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive/{{ version }}"
           dest: "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
-        - src: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive/{{ version }}"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive/{{ version }}"
           dest: "/pfs/lustrep4/{{ appl_dir }}/matlab/interactive"
 
     - name: "Synchronize modulefiles"
       ansible.builtin.command: |
         rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
       loop:
-        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab"
-          dest: "/pfs/lustrep2/{{ modulefiles_dir }}"
-        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab"
+        - src: "/pfs/lustrep2/{{ modulefiles_dir }}/matlab"
+          dest: "/pfs/lustrep1/{{ modulefiles_dir }}"
+        - src: "/pfs/lustrep2/{{ modulefiles_dir }}/matlab"
           dest: "/pfs/lustrep3/{{ modulefiles_dir }}"
-        - src: "/pfs/lustrep1/{{ modulefiles_dir }}/matlab"
+        - src: "/pfs/lustrep2/{{ modulefiles_dir }}/matlab"
           dest: "/pfs/lustrep4/{{ modulefiles_dir }}"
