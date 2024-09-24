@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# MATLAB executes this script directly.
+export MATLAB_SING_IMAGE="/appl/soft/math/matlab/mps/{{ version }}/matlab.sif"
+
+# Call matlab with the right arguments
+"/appl/soft/math/matlab/mps/{{ version }}/bin/apptainer_exec" worker "$@"
