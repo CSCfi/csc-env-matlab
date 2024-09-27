@@ -2,7 +2,10 @@
 In this repository contains intructions for creating a containerized [MATLAB](https://mathworks.com) and [MATLAB Parallel Server (MPS)](https://mathworks.com/products/matlab-parallel-server.html) installation for Linux with [Apptainer](https://apptainer.org/).
 Containerized installation is useful for Linux cluster environments.
 We need graphical user interface for installing MATLAB, for example, desktop or laptop computer.
-Currently, there are instructions for installing MATLAB version *R2023b*.
+
+- https://github.com/mathworks-ref-arch/container-images
+- https://github.com/mathworks-ref-arch/matlab-dockerfile
+- https://github.com/mathworks/matlab-proxy
 
 
 ## Installing MATLAB on local computer
