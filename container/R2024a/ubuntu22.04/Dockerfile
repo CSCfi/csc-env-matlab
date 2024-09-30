@@ -87,12 +87,13 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 
 # Install MATLAB using mpm
-COPY ./mpm_input_puhti.txt /opt/mpm_input.txt
+ARG MPM_INPUT_FILE
+COPY ${MPM_INPUT_FILE} /opt/mpm_input_r2024a.txt
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
     curl --location --remote-name https://www.mathworks.com/mpm/glnxa64/mpm && \
     chmod u+x mpm && \
-    ./mpm install --inputfile /opt/mpm_input.txt && \
+    ./mpm install --inputfile /opt/mpm_input_r2024a.txt && \
     rm -r /tmp/build && \
     ln -sf /opt/matlab/bin/matlab /usr/local/bin/matlab
 
