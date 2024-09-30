@@ -88,18 +88,18 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 # Install MATLAB using mpm
 ARG MPM_INPUT_FILE
-COPY ${MPM_INPUT_FILE} /opt/mpm_input_r2024a.txt
+COPY ${MPM_INPUT_FILE} /tmp/mpm_input.txt
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
     curl --location --remote-name https://www.mathworks.com/mpm/glnxa64/mpm && \
     chmod u+x mpm && \
-    ./mpm install --inputfile /opt/mpm_input_r2024a.txt && \
+    ./mpm install --inputfile /tmp/mpm_input.txt && \
     rm -r /tmp/build && \
     ln -sf /opt/matlab/bin/matlab /usr/local/bin/matlab
 
 
 # Additional clean up
-RUN rm /tmp/base-dependencies.txt /tmp/mathworks_root.log
+RUN rm /tmp/base-dependencies.txt /tmp/mathworks_root.log /tmp/mpm_input.txt
 
 
 # License

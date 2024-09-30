@@ -63,7 +63,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 
 # Install matlab-proxy
-ARG MATLAB_PROXY_VERSION=0.23.1
+ARG MATLAB_PROXY_VERSION
 RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     python3 -m pip install --no-cache-dir "matlab-proxy==${MATLAB_PROXY_VERSION}"
 
@@ -87,20 +87,21 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 
 # Install MATLAB using mpm
+ARG MPM_INPUT_FILE
+COPY ${MPM_INPUT_FILE} /tmp/mpm_input.txt
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
     curl --location --remote-name https://www.mathworks.com/mpm/glnxa64/mpm && \
     chmod u+x mpm && \
-    ./mpm install \
-        --release R2024a \
-        --destination /opt/matlab \
-        --products \
-            MATLAB \
-            MATLAB_Parallel_Server \
-        && \
+    ./mpm install --inputfile /tmp/mpm_input.txt && \
     rm -r /tmp/build && \
     ln -sf /opt/matlab/bin/matlab /usr/local/bin/matlab
 
 
+# Additional clean up
+RUN rm /tmp/base-dependencies.txt /tmp/mathworks_root.log /tmp/mpm_input.txt
+
+
 # License
-ENV MLM_LICENSE_FILE=1766@license4.csc.fi
+ARG MLM_LICENSE_FILE
+ENV MLM_LICENSE_FILE=${MLM_LICENSE_FILE}
