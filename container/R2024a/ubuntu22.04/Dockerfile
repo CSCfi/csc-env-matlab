@@ -63,7 +63,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 
 # Install matlab-proxy
-ARG MATLAB_PROXY_VERSION=0.23.1
+ARG MATLAB_PROXY_VERSION
 RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     python3 -m pip install --no-cache-dir "matlab-proxy==${MATLAB_PROXY_VERSION}"
 
