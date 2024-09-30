@@ -7,8 +7,8 @@ build_puhti() {
     podman build \
         --build-arg "MLM_LICENSE_FILE=1766@license4.csc.fi" \
         --build-arg "MATLAB_PROXY_VERSION=0.23.1" \
-        --build-arg "MPM_INPUT_FILE=./mpm_input_r2024a_puhti.txt" \
-        --tag "localhost/matlab:r2024a-puhti" \
+        --build-arg "MPM_INPUT_FILE=./mpm_input_r2023b_puhti.txt" \
+        --tag "localhost/matlab:r2023b-puhti" \
         --file Dockerfile \
         .
 }
@@ -17,8 +17,8 @@ build_lumi() {
     podman build \
         --build-arg "MLM_LICENSE_FILE=1766@license10.csc.fi" \
         --build-arg "MATLAB_PROXY_VERSION=0.23.1" \
-        --build-arg "MPM_INPUT_FILE=./mpm_input_r2024a_lumi.txt" \
-        --tag "localhost/matlab:r2024a-lumi" \
+        --build-arg "MPM_INPUT_FILE=./mpm_input_r2023b_lumi.txt" \
+        --tag "localhost/matlab:r2023b-lumi" \
         --file Dockerfile \
         .
 }
