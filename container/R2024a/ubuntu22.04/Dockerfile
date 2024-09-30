@@ -98,4 +98,5 @@ RUN mkdir -p /tmp/build && \
 
 
 # License
-ENV MLM_LICENSE_FILE=1766@license4.csc.fi
+ARG MLM_LICENSE_FILE
+ENV MLM_LICENSE_FILE=${MLM_LICENSE_FILE}
