@@ -97,6 +97,10 @@ RUN mkdir -p /tmp/build && \
     ln -sf /opt/matlab/bin/matlab /usr/local/bin/matlab
 
 
+# Additional clean up
+RUN rm /tmp/base-dependencies.txt /tmp/mathworks_root.log
+
+
 # License
 ARG MLM_LICENSE_FILE
 ENV MLM_LICENSE_FILE=${MLM_LICENSE_FILE}
