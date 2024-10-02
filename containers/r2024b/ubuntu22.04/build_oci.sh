@@ -3,7 +3,7 @@
 # Changes directory to script's location or exits on failure.
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 
-build_puhti() {
+build_podman_puhti() {
     podman build \
         --build-arg "MLM_LICENSE_FILE=1766@license4.csc.fi" \
         --build-arg "MATLAB_PROXY_VERSION=0.23.1" \
@@ -13,7 +13,7 @@ build_puhti() {
         .
 }
 
-build_lumi() {
+build_podman_lumi() {
     podman build \
         --build-arg "MLM_LICENSE_FILE=1766@license10.csc.fi" \
         --build-arg "MATLAB_PROXY_VERSION=0.23.1" \
@@ -24,7 +24,7 @@ build_lumi() {
 }
 
 case "$1" in
-    puhti) build_puhti ;;
-    lumi) build_lumi ;;
-    *) exit ;;
+    puhti) build_podman_puhti ;;
+    lumi) build_podman_lumi ;;
+    *) exit 1 ;;
 esac
