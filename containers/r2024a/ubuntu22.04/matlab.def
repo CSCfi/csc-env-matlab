@@ -1,9 +1,9 @@
-# Copyright 2024 The MathWorks, Inc.
 Bootstrap: docker
 From: ubuntu:22.04
 
 %labels
     maintainer "The MathWorks"
+    copyright "Copyright 2024 The MathWorks, Inc."
 
 %arguments
     MPM_INPUT_FILE=
