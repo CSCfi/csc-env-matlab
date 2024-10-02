@@ -103,7 +103,7 @@ destinationFolder=/opt/matlab
 #product.Instrument_Control_Toolbox
 #product.LTE_Toolbox
 #product.Lidar_Toolbox
-#product.MATLAB
+product.MATLAB
 #product.MATLAB_Coder
 #product.MATLAB_Compiler
 #product.MATLAB_Compiler_SDK
@@ -120,7 +120,7 @@ destinationFolder=/opt/matlab
 #product.Motor_Control_Blockset
 #product.Navigation_Toolbox
 #product.Optimization_Toolbox
-#product.Parallel_Computing_Toolbox
+product.Parallel_Computing_Toolbox
 #product.Partial_Differential_Equation_Toolbox
 #product.Phased_Array_System_Toolbox
 #product.Polyspace_Bug_Finder
