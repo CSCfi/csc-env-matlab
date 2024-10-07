@@ -10,7 +10,7 @@ USAGE
 EXAMPLES
     # Install MATLAB version r2023b to Puhti:
 
-    install.sh puhti matlab-puhti r2023b
+    install.sh puhti puhti r2023b
 "
 
 case ${1:-} in
