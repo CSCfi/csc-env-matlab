@@ -13,14 +13,14 @@
         group: "{{ group }}"
       loop:
         - "matlab"
-        - "matlab/interactive"
-        - "matlab/interactive/{{ version }}"
-        - "matlab/interactive/{{ version }}/bin"
+        - "matlab/mps"
+        - "matlab/mps/{{ version }}"
+        - "matlab/mps/{{ version }}/bin"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
@@ -28,6 +28,15 @@
         - "matlab"
         - "mex"
         - "matlab-proxy-app"
+
+    - name: "Copy the wrapper script templates"
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}.j2"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+      loop:
+        - "worker"
 
     - name: "Create a matlab modulefiles directory"
       ansible.builtin.file:
@@ -42,15 +51,6 @@
         dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
-
-    - name: "Copy the installation"
-      ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/matlab.sif"
-        dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/matlab.sif"
-        mode: "ug=rwx,o=rx"
-        group: "{{ group }}"
-      tags:
-        - "large"
 
     - name: "Link matlab-proxy to matlab for ood-matlab-html"
       ansible.builtin.file:

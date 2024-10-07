@@ -15,7 +15,7 @@ image = pathJoin(appl_dir, "mps", version, "matlab.sif")
 setenv("MATLAB_SING_IMAGE", image)
 
 -- Load message and license disclaimer
-loadmsg = "MATLAB Parallel Server\nVersion: " .. version .. "\nLicense: Academic\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n"
+loadmsg = "MATLAB\nVersion: " .. version .. "\nLicense: Academic\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------"
 
 if (mode() == "load") then
   LmodMessage(loadmsg)
