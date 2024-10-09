@@ -52,9 +52,11 @@
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
-    - name: "Link matlab-proxy to matlab for ood-matlab-html"
-      ansible.builtin.file:
-        src: "mps"
-        dest: "{{ modulefiles_dir }}/matlab-proxy"
-        state: "link"
+    - name: "Copy container files"
+      ansible.builtin.copy:
+        src: "{{ inventory_dir }}/containers/{{ version }}/ubuntu22.04/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/"
+        mode: "ug=rwx,o=rx"
         group: "{{ group }}"
+      loop:
+        - "binaries.sh"

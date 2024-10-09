@@ -40,4 +40,4 @@ shift 1
 VERSION=$1
 shift 1
 
-ansible-playbook -i hosts.yaml -l "$GROUPNAME" -e "version=$VERSION" "$TARGET/install.yaml" "$@"
+ansible-playbook -i hosts.yaml -l "$GROUPNAME" -e "version=$VERSION" "target/$TARGET/install.yaml" "$@"
