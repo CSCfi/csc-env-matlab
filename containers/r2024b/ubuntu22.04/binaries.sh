@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 mkdir -p bin bin/util bin/glnxa64
-apptainer exec --bind /run/user matlab-r2024a-puhti.sif bash -c "
+apptainer exec --bind /run/user matlab.sif bash -c "
 cp -n /opt/matlab/bin/mw_mpiexec bin/mw_mpiexec
 cp -n /opt/matlab/bin/mw_smpd bin/mw_smpd
 cp -n /opt/matlab/bin/util/arch.sh bin/util/arch.sh

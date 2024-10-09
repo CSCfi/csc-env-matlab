@@ -7,8 +7,8 @@ build_apptainer_support() {
     apptainer build \
         --build-arg "MLM_LICENSE_FILE=" \
         --build-arg "MATLAB_PROXY_VERSION=0.23.1" \
-        --build-arg "MPM_INPUT_FILE=./mpm_input_r2024b_support.txt" \
-        matlab-r2024b-support.sif \
+        --build-arg "MPM_INPUT_FILE=./support/mpm_input_r2024b.txt" \
+        ./support/matlab-r2024b.sif \
         matlab.def
 }
 
@@ -16,8 +16,8 @@ build_apptainer_puhti() {
     apptainer build \
         --build-arg "MLM_LICENSE_FILE=1766@license4.csc.fi" \
         --build-arg "MATLAB_PROXY_VERSION=0.23.1" \
-        --build-arg "MPM_INPUT_FILE=./mpm_input_r2024b_puhti.txt" \
-        matlab-r2024b-puhti.sif \
+        --build-arg "MPM_INPUT_FILE=./puhti/mpm_input_r2024b.txt" \
+        ./puhti/matlab-r2024b.sif \
         matlab.def
 }
 
@@ -25,8 +25,8 @@ build_apptainer_lumi() {
     apptainer build \
         --build-arg "MLM_LICENSE_FILE=1766@license10.csc.fi" \
         --build-arg "MATLAB_PROXY_VERSION=0.23.1" \
-        --build-arg "MPM_INPUT_FILE=./mpm_input_r2024b_lumi.txt" \
-        matlab-r2024b-lumi.sif \
+        --build-arg "MPM_INPUT_FILE=./lumi/mpm_input_r2024b.txt" \
+        ./lumi/matlab-r2024b.sif \
         matlab.def
 }
 
