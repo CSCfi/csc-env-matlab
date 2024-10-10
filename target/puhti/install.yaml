@@ -54,9 +54,7 @@
 
     - name: "Copy container files"
       ansible.builtin.copy:
-        src: "{{ inventory_dir }}/containers/{{ version }}/ubuntu22.04/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/"
+        src: "{{ playbook_dir }}/{{ version }}/extract_binaries.sh"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
-      loop:
-        - "binaries.sh"
