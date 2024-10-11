@@ -31,12 +31,10 @@
 
     - name: "Copy the wrapper script templates"
       ansible.builtin.template:
-        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}.j2"
-        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/{{ version }}/bin/worker.j2"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/worker"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
-      loop:
-        - "worker"
 
     - name: "Create a matlab modulefiles directory"
       ansible.builtin.file:
@@ -52,9 +50,16 @@
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
-    - name: "Copy container files"
+    - name: "Copy script to extract binaries for MATLAB Parallel Server"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/{{ version }}/extract_binaries.sh"
         dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+
+    - name: "Copy the container"
+      ansible.builtin.copy:
+        src: "{{ inventory_dir }}/containers/{{ version }}/ubuntu22.04/matlab.sif"
+        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
