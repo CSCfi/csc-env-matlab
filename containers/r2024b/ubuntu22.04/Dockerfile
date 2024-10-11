@@ -63,8 +63,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 
 # Install MATLAB using mpm
-ARG MPM_INPUT_FILE
-COPY ${MPM_INPUT_FILE} /tmp/mpm_input.txt
+COPY ./mpm_input.txt /tmp/mpm_input.txt
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
     curl --location --remote-name https://www.mathworks.com/mpm/glnxa64/mpm && \
@@ -76,11 +75,6 @@ RUN mkdir -p /tmp/build && \
 
 # Additional clean up
 RUN rm /tmp/base-dependencies.txt /tmp/mathworks_root.log /tmp/mpm_input.txt
-
-
-# License
-ARG MLM_LICENSE_FILE
-ENV MLM_LICENSE_FILE=${MLM_LICENSE_FILE}
 
 
 # Install dependencies for matlab-proxy
