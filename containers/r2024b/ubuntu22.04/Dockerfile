@@ -63,7 +63,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 
 # Install MATLAB using mpm
-COPY ./mpm_input.txt /tmp/mpm_input.txt
+COPY mpm_input.txt /tmp/mpm_input.txt
 RUN mkdir -p /tmp/build && \
     cd /tmp/build && \
     curl --location --remote-name https://www.mathworks.com/mpm/glnxa64/mpm && \

@@ -6,13 +6,11 @@ From: ubuntu:22.04
     copyright "Copyright 2023 The MathWorks, Inc."
 
 %arguments
-    MPM_INPUT_FILE=
-    MLM_LICENSE_FILE=
     MATLAB_PROXY_VERSION=
 
 %files
     base-dependencies.txt /opt/base-dependencies.txt
-    {{MPM_INPUT_FILE}} /opt/mpm_input.txt
+    mpm_input.txt /opt/mpm_input.txt
 
 %post
     export DEBIAN_FRONTEND="noninteractive"
@@ -92,5 +90,4 @@ From: ubuntu:22.04
 
 %environment
     export TZ="Etc/UTC"
-    export MLM_LICENSE_FILE="{{MLM_LICENSE_FILE}}"
     export PYTHONNOUSERSITE="1"

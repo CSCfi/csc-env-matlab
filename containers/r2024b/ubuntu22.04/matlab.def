@@ -9,8 +9,8 @@ From: ubuntu:22.04
     MATLAB_PROXY_VERSION=
 
 %files
-    ./base-dependencies.txt /opt/base-dependencies.txt
-    ./mpm_input.txt /opt/mpm_input.txt
+    base-dependencies.txt /opt/base-dependencies.txt
+    mpm_input.txt /opt/mpm_input.txt
 
 %post
     export DEBIAN_FRONTEND="noninteractive"
