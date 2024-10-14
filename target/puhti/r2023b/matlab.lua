@@ -15,7 +15,14 @@ image = pathJoin(appl_dir, "mps", version, "matlab.sif")
 setenv("MATLAB_SING_IMAGE", image)
 
 -- Set license
-license = os.getenv("MLM_LICENSE_FILE") or "1766@license4.csc.fi"
+license_default = os.getenv("MLM_LICENSE_FILE")
+if license_default == nil or license_default == "" then
+    license = "1766@license4.csc.fi"
+elseif license_default == "/opt/matlab/licenses/network.lic" then
+    license = "1766@license10.csc.fi"
+else
+    license = license_default
+end
 setenv("MLM_LICENSE_FILE", license)
 
 -- Load message and license disclaimer
