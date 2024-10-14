@@ -4,8 +4,7 @@ This repository contains MATLAB containers designed for use in High-Performance 
 The container definitions use the official [MATLAB container dependencies](https://github.com/mathworks-ref-arch/container-images) and the [MATLAB Package Manager (MPM)](https://github.com/mathworks-ref-arch/matlab-dockerfile) to install MATLAB and all available toolboxes on Linux.
 The installation also includes the [MATLAB Proxy](https://github.com/mathworks/matlab-proxy) for an HTML-based web interface.
 We use Ansible playbooks to install the containerized MATLAB on the clusters.
-We can build a specific MATLAB container using the appropriate build script.
-It uses Apptainer internally.
+We can build a specific MATLAB container using the appropriate build script which uses Apptainer internally as follows:
 
 ```bash
 ./containers/r2024b/ubuntu22.04/build.sh sif
