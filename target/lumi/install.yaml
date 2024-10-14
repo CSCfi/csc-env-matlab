@@ -44,7 +44,7 @@
 
     - name: "Copy the installation"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/matlab.sif"
+        src: "{{ inventory_dir }}/containers/{{ version }}/ubuntu22.04/matlab.sif"
         dest: "{{ appl_dir }}/matlab/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
