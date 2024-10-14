@@ -13,14 +13,13 @@
         group: "{{ group }}"
       loop:
         - "matlab"
-        - "matlab/interactive"
-        - "matlab/interactive/{{ version }}"
-        - "matlab/interactive/{{ version }}/bin"
+        - "matlab/{{ version }}"
+        - "matlab/{{ version }}/bin"
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/bin/{{ item }}"
+        dest: "{{ appl_dir }}/matlab/{{ version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
@@ -46,7 +45,7 @@
     - name: "Copy the installation"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/{{ version }}/matlab.sif"
-        dest: "{{ appl_dir }}/matlab/interactive/{{ version }}/matlab.sif"
+        dest: "{{ appl_dir }}/matlab/{{ version }}/matlab.sif"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       tags:
@@ -66,22 +65,19 @@
         group: "{{ group }}"
       loop:
         - "/pfs/lustrep1/{{ appl_dir }}/matlab"
-        - "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive"
         - "/pfs/lustrep3/{{ appl_dir }}/matlab"
-        - "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
         - "/pfs/lustrep4/{{ appl_dir }}/matlab"
-        - "/pfs/lustrep4/{{ appl_dir }}/matlab/interactive"
 
     - name: "Synchronize installation"
       ansible.builtin.command: |
         rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
       loop:
-        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive/{{ version }}"
-          dest: "/pfs/lustrep1/{{ appl_dir }}/matlab/interactive"
-        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive/{{ version }}"
-          dest: "/pfs/lustrep3/{{ appl_dir }}/matlab/interactive"
-        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/interactive/{{ version }}"
-          dest: "/pfs/lustrep4/{{ appl_dir }}/matlab/interactive"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/{{ version }}"
+          dest: "/pfs/lustrep1/{{ appl_dir }}/matlab"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/{{ version }}"
+          dest: "/pfs/lustrep3/{{ appl_dir }}/matlab"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/matlab/{{ version }}"
+          dest: "/pfs/lustrep4/{{ appl_dir }}/matlab"
 
     - name: "Synchronize modulefiles"
       ansible.builtin.command: |
