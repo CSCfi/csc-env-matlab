@@ -1,0 +1,12 @@
+- name: "Install Mathworks ServiceHost"
+  hosts:
+    - "group_puhti"
+  become: false
+  vars:
+    release_number: "2024.13.0.2"
+
+  tasks:
+    # TODO: download "https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v$release_number/release/glnxa64/managed_mathworksservicehost_${release_number}_package_glnxa64.zip"
+    # {{appl_dir}}/matlab/mathworksservicehost/{{release_number}}
+    # TODO: unzip
+    # TODO: symbolic link from latest to release_number

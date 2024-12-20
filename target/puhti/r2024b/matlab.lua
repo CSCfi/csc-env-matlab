@@ -25,6 +25,10 @@ else
 end
 setenv("MLM_LICENSE_FILE", license)
 
+-- Mathworks servicehost
+--servicehost_dir = pathJoin(appl_dir, "mathworksservicehost", "latest")
+--setenv("MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT", servicehost_dir)
+
 -- Load message and license disclaimer
 loadmsg = "MATLAB\nVersion: " .. version .. "\nLicense: Academic\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------"
 
