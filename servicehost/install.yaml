@@ -21,7 +21,7 @@
     - name: "Download the mathworks servicehost"
       ansible.builtin.get_url:
         url: "https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v{{ version }}/release/glnxa64/managed_mathworksservicehost_{{ version }}_package_glnxa64.zip"
-        dest: "{{ appl_dir }}/mathworksservicehost/{{ version }}.zip"
+        dest: "{{ appl_dir }}/mathworksservicehost/{{ version }}/mathworksservicehost.zip"
         checksum: "{{ checksum }}"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
@@ -29,10 +29,10 @@
     - name: "Convert zip to squashfs"
       ansible.builtin.shell: |
         SERVICEHOST_TMP=$(mktemp --directory)
-        unzip "{{ version }}.zip" -d "$SERVICEHOST_TMP"
-        mksquashfs "$SERVICEHOST_TMP" "{{ version }}.sqfs" -all-root
+        unzip mathworksservicehost.zip -d "$SERVICEHOST_TMP"
+        mksquashfs "$SERVICEHOST_TMP" mathworksservicehost.sqfs -all-root
       args:
-        chdir: "{{ appl_dir }}/mathworksservicehost"
-        creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}.sqfs"
+        chdir: "{{ appl_dir }}/mathworksservicehost/{{ version }}"
+        creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}/mathworksservicehost.sqfs"
 
     # TODO: symbolic link from latest to version
