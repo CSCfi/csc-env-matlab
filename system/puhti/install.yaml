@@ -1,7 +1,6 @@
 - name: "Install matlab environment"
   hosts:
-    - "group_localhost"
-    - "group_puhti"
+    - "puhti"
   become: false
 
   tasks:
