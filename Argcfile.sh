@@ -42,6 +42,7 @@ install-matlab() {
 # @option --system![puhti|lumi]
 # @option --version=2024.13.0.2
 install-servicehost() {
+    # TODO: check whether newer version is available
     ansible-playbook \
         -i hosts.yaml \
         -l "${argc_system}" \

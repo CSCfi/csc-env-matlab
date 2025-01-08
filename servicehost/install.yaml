@@ -31,8 +31,14 @@
         SERVICEHOST_TMP=$(mktemp --directory)
         unzip mathworksservicehost.zip -d "$SERVICEHOST_TMP"
         mksquashfs "$SERVICEHOST_TMP" mathworksservicehost.sqfs -all-root
+        chmod "ug=rw,o=r" mathworksservicehost.sqfs
       args:
         chdir: "{{ appl_dir }}/mathworksservicehost/{{ version }}"
         creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}/mathworksservicehost.sqfs"
 
-    # TODO: symbolic link from latest to version
+    - name: "Create symbolic link to the latest version"
+      ansible.builtin.file:
+        src: "{{ version }}"
+        dest: "{{ appl_dir }}/mathworksservicehost/latest"
+        state: "link"
+        group: "{{ group }}"
