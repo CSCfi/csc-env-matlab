@@ -1,13 +1,38 @@
 - name: "Install Mathworks ServiceHost"
   hosts:
     - "puhti"
-    - "lumi"
   become: false
-  vars:
-    release_number: "2024.13.0.2"
 
   tasks:
-    # TODO: download "https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v$release_number/release/glnxa64/managed_mathworksservicehost_${release_number}_package_glnxa64.zip"
-    # {{appl_dir}}/matlab/mathworksservicehost/{{release_number}}
-    # TODO: unzip
-    # TODO: symbolic link from latest to release_number
+    - name: "Include variables"
+      ansible.builtin.include_vars:
+        file: "{{ playbook_dir }}/version/{{ version }}.yaml"
+
+    - name: "Create Mathworks ServiceHost directory"
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "mathworksservicehost"
+        - "mathworksservicehost/{{ version }}"
+
+    - name: "Download the mathworks servicehost"
+      ansible.builtin.get_url:
+        url: "https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v{{ version }}/release/glnxa64/managed_mathworksservicehost_{{ version }}_package_glnxa64.zip"
+        dest: "{{ appl_dir }}/mathworksservicehost/{{ version }}.zip"
+        checksum: "{{ checksum }}"
+        mode: "ug=rw,o=r"
+        group: "{{ group }}"
+
+    - name: "Convert zip to squashfs"
+      ansible.builtin.shell: |
+        SERVICEHOST_TMP=$(mktemp --directory)
+        unzip "{{ version }}.zip" -d "$SERVICEHOST_TMP"
+        mksquashfs "$SERVICEHOST_TMP" "{{ version }}.sqfs" -all-root
+      args:
+        chdir: "{{ appl_dir }}/mathworksservicehost"
+        creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}.sqfs"
+
+    # TODO: symbolic link from latest to version

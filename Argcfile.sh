@@ -40,8 +40,13 @@ install-matlab() {
 # @cmd Install Mathworks ServiceHost
 # @meta require-tools ansible-playbook
 # @option --system![puhti|lumi]
+# @option --version=2024.13.0.2
 install-servicehost() {
-    echo TODO install-servicehost
+    ansible-playbook \
+        -i hosts.yaml \
+        -l "${argc_system}" \
+        -e "version=${argc_version}" \
+        "./servicehost/install.yaml" "$@"
 }
 
 # See more details at https://github.com/sigoden/argc
