@@ -35,11 +35,7 @@
         creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}/bin"
 
     - name: "Write LatestInstall.info"
-      ansible.builtin.shell: |
-        {
-          echo "LatestDSInstallerVersion {{ version }}"
-          echo "LatestDSInstallRoot {{ appl_dir }}/mathworksservicehost/{{ version }}"
-          echo "DSLauncherExecutable {{ appl_dir }}/mathworksservicehost/{{ version }}/bin/glnxa64/MathWorksServiceHost"
-        } > LatestInstall.info
-      args:
-        chdir: "{{ appl_dir }}/mathworksservicehost"
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/templates/LatestInstall.info.j2"
+        dest: "{{ appl_dir }}/mathworksservicehost/LatestInstall.info"
+        group: "{{ group }}"
