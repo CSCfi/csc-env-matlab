@@ -39,12 +39,16 @@ install-matlab() {
         "./system/${argc_system}/install.yaml" "$@"
 }
 
-# @cmd Install Mathworks ServiceHost
+# @cmd Install MathWorks ServiceHost
 # @meta require-tools ansible-playbook
 # @option --system![puhti|lumi]
 # @option --version=2024.13.0.2
 install-servicehost() {
-    # TODO: check whether newer version is available
+    local LATEST_VERSION
+    LATEST_VERSION=$(curl --silent https://raw.githubusercontent.com/mathworks-ref-arch/administer-mathworks-service-host/refs/heads/main/admin-scripts/linux/admin-controlled-installation/latest_release.txt)
+    if [ "${argc_version}" != "${LATEST_VERSION}" ]; then
+        echo "Latest version: ${LATEST_VERSION}. Currently using version: ${argc_version}."
+    fi
     ansible-playbook \
         -i hosts.yaml \
         -l "${argc_system}" \
