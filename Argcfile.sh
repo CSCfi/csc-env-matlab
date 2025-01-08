@@ -5,24 +5,26 @@ set -e
 # @cmd Build MATLAB container in SIF format
 # @meta require-tools apptainer
 # @option --version![=r2024b|r2024a|r2023b]
-# @option --proxy_version=0.23.1
+# @option --proxy-version=0.23.1
+# @option --os-version=ubuntu22.04
 build-matlab-sif() {
     apptainer build \
         --build-arg "MATLAB_PROXY_VERSION=${argc_proxy_version}" \
-        "./containers/ubuntu22.04/${argc_version}/matlab.sif" \
-        "./containers/ubuntu22.04/${argc_version}/matlab.def"
+        "./containers/${argc_version}/${argc_os_version}/matlab.sif" \
+        "./containers/${argc_version}/${argc_os_version}/matlab.def"
 }
 
 # @cmd Build MATLAB container in OCI format
 # @meta require-tools podman
 # @option --version![=r2024b|r2024a|r2023b]
-# @option --proxy_version=0.23.1
+# @option --proxy-version=0.23.1
+# @option --os-version=ubuntu22.04
 build-matlab-oci() {
     podman build \
         --build-arg "MATLAB_PROXY_VERSION=${argc_proxy_version}" \
         --tag "localhost/matlab:${argc_version}" \
-        --file "./containers/ubuntu22.04/${argc_version}/Dockerfile" \
-        "./containers/ubuntu22.04/${argc_version}"
+        --file "./containers/${argc_version}/${argc_os_version}/Dockerfile" \
+        "./containers/${argc_version}/${argc_os_version}"
 }
 
 # @cmd Install MATLAB container and modulefiles
