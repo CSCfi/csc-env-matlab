@@ -3,14 +3,10 @@
 This repository contains MATLAB containers designed for use in High-Performance Computing (HPC) clusters.
 The container definitions use the official [MATLAB container dependencies](https://github.com/mathworks-ref-arch/container-images) and the [MATLAB Package Manager (MPM)](https://github.com/mathworks-ref-arch/matlab-dockerfile) to install MATLAB and all available toolboxes on Linux.
 The installation also includes the [MATLAB Proxy](https://github.com/mathworks/matlab-proxy) for an HTML-based web interface.
-We also install [administered MathWorks Service Host](https://github.com/mathworks-ref-arch/administer-mathworks-service-host/).
+We also install and use the [administered MathWorks Service Host](https://github.com/mathworks-ref-arch/administer-mathworks-service-host/).
 We use Ansible playbooks to install the containerized MATLAB on the clusters.
-
-We can build a specific MATLAB container using the appropriate build script which uses Apptainer internally as follows:
-
-```bash
-./containers/r2024b/ubuntu22.04/build.sh sif
-```
+Commands to build the containers, install MATLAB environment and MathWorks ServiceHost is in the `Argcfile.sh` which uses [argc](https://github.com/sigoden/argc).
+Use the `argc --help` for more information.
 
 To run with the default license:
 
