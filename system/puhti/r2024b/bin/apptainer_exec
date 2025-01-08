@@ -36,6 +36,9 @@ MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /run:/run"
 # Block MATLAB from installing ServiceHost (700 MB with 10k files per host).
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /dev/null:$HOME/.MathWorks/ServiceHost"
 
+# Bind managed mathworks servicehost
+MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /appl/soft/math/mathworksservicehost"
+
 # Enable Nvidia GPUs
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS --nv"
 

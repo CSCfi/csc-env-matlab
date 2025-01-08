@@ -4,14 +4,14 @@ family("matlab")
 version = myModuleVersion()
 
 -- Path to the application directory.
-appl_dir = "/appl/soft/math/matlab"
+appl_dir = "/appl/soft/math"
 
 -- Add wrapper scripts to the path.
-bin_dir = pathJoin(appl_dir, "mps", version, "bin")
+bin_dir = pathJoin(appl_dir, "matlab", "mps", version, "bin")
 prepend_path("PATH", bin_dir)
 
 -- Path to the matlab container image to run using apptainer or singularity.
-image = pathJoin(appl_dir, "mps", version, "matlab.sif")
+image = pathJoin(appl_dir, "matlab", "mps", version, "matlab.sif")
 setenv("MATLAB_SING_IMAGE", image)
 
 -- Set license
@@ -26,8 +26,7 @@ end
 setenv("MLM_LICENSE_FILE", license)
 
 -- Mathworks servicehost
---servicehost_dir = pathJoin(appl_dir, "mathworksservicehost", "latest")
---setenv("MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT", servicehost_dir)
+setenv("MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT", pathJoin(appl_dir, "mathworksservicehost"))
 
 -- Load message and license disclaimer
 loadmsg = "MATLAB\nVersion: " .. version .. "\nLicense: Academic\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------"

@@ -21,24 +21,25 @@
     - name: "Download the mathworks servicehost"
       ansible.builtin.get_url:
         url: "https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v{{ version }}/release/glnxa64/managed_mathworksservicehost_{{ version }}_package_glnxa64.zip"
-        dest: "{{ appl_dir }}/mathworksservicehost/{{ version }}/mathworksservicehost.zip"
+        dest: "{{ appl_dir }}/mathworksservicehost/{{ version }}.zip"
         checksum: "{{ checksum }}"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
-    - name: "Convert zip to squashfs"
-      ansible.builtin.shell: |
-        SERVICEHOST_TMP=$(mktemp --directory)
-        unzip mathworksservicehost.zip -d "$SERVICEHOST_TMP"
-        mksquashfs "$SERVICEHOST_TMP" mathworksservicehost.sqfs -all-root
-        chmod "ug=rw,o=r" mathworksservicehost.sqfs
-      args:
-        chdir: "{{ appl_dir }}/mathworksservicehost/{{ version }}"
-        creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}/mathworksservicehost.sqfs"
-
-    - name: "Create symbolic link to the latest version"
-      ansible.builtin.file:
-        src: "{{ version }}"
-        dest: "{{ appl_dir }}/mathworksservicehost/latest"
-        state: "link"
+    - name: "Unzip the servicehost"
+      ansible.builtin.unarchive:
+        src: "{{ appl_dir }}/mathworksservicehost/{{ version }}.zip"
+        dest: "{{ appl_dir }}/mathworksservicehost/{{ version }}"
+        remote_src: true
         group: "{{ group }}"
+        creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}/bin"
+
+    - name: "Write LatestInstall.info"
+      ansible.builtin.shell: |
+        {
+          echo "LatestDSInstallerVersion {{ version }}"
+          echo "LatestDSInstallRoot {{ appl_dir }}/mathworksservicehost/{{ version }}"
+          echo "DSLauncherExecutable {{ appl_dir }}/mathworksservicehost/{{ version }}/bin/glnxa64/MathWorksServiceHost"
+        } > LatestInstall.info
+      args:
+        chdir: "{{ appl_dir }}/mathworksservicehost"
