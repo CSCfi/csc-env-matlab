@@ -4,14 +4,14 @@ family("matlab")
 version = myModuleVersion()
 
 -- Path to the application directory.
-appl_dir = "/appl/local/csc/soft/math/matlab"
+appl_dir = "/appl/local/csc/soft/math"
 
 -- Add wrapper scripts to the path.
-bin_dir = pathJoin(appl_dir, version, "bin")
+bin_dir = pathJoin(appl_dir, "matlab", version, "bin")
 prepend_path("PATH", bin_dir)
 
 -- Path to the matlab container image run using `apptainer_wrapper`.
-image = pathJoin(appl_dir, version, "matlab.sif")
+image = pathJoin(appl_dir, "matlab", version, "matlab.sif")
 setenv("MATLAB_SING_IMAGE", image)
 
 -- Set license
