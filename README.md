@@ -5,7 +5,7 @@ The container definitions use the official [MATLAB container dependencies](https
 The installation also includes the [MATLAB Proxy](https://github.com/mathworks/matlab-proxy) for an HTML-based web interface.
 We also install and use the [administered MathWorks Service Host](https://github.com/mathworks-ref-arch/administer-mathworks-service-host/).
 We use Ansible playbooks to install the containerized MATLAB on the clusters.
-Commands to build the containers, install MATLAB environment and MathWorks ServiceHost is in the `Argcfile.sh` which uses [argc](https://github.com/sigoden/argc).
+Commands to build the containers, install MATLAB environment and MathWorks ServiceHost are in the `Argcfile.sh` and we can invoke them using [argc](https://github.com/sigoden/argc).
 Use the `argc --help` for more information.
 
 To run with the default license:
