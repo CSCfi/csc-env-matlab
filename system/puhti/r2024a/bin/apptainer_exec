@@ -39,6 +39,11 @@ MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /run:/run"
 # Bind managed mathworks servicehost
 if [ -d /appl/soft/math/mathworksservicehost ]; then
     MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /appl/soft/math/mathworksservicehost"
+
+    # If there is a regular file blocking the MathWorks ServiceHost from installing, remove it.
+    if [ -f "$HOME/.MathWorks/ServiceHost" ]; then
+        rm -f "$HOME/.MathWorks/ServiceHost"
+    fi
 fi
 
 # Enable Nvidia GPUs
