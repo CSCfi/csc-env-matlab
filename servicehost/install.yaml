@@ -1,6 +1,7 @@
 - name: "Install Mathworks ServiceHost"
   hosts:
     - "puhti"
+    - "mahti"
   become: false
 
   tasks:

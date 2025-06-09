@@ -1,6 +1,6 @@
 - name: "Install matlab environment"
   hosts:
-    - "puhti"
+    - "mahti"
   become: false
 
   tasks:
@@ -49,12 +49,12 @@
         mode: "ug=rw,o=r"
         group: "{{ group }}"
 
-    - name: "Copy script to extract binaries for MATLAB Parallel Server"
-      ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/extract_binaries.sh"
-        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
-        mode: "ug=rwx,o=rx"
-        group: "{{ group }}"
+    #- name: "Copy script to extract binaries for MATLAB Parallel Server"
+    #  ansible.builtin.copy:
+    #    src: "{{ playbook_dir }}/{{ version }}/extract_binaries.sh"
+    #    dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
+    #    mode: "ug=rwx,o=rx"
+    #    group: "{{ group }}"
 
     - name: "Copy the container"
       ansible.builtin.copy:

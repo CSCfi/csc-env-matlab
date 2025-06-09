@@ -31,7 +31,7 @@ build-matlab-oci() {
 
 # @cmd Install MATLAB container and modulefiles
 # @meta require-tools ansible-playbook
-# @option --system![puhti|lumi]
+# @option --system![puhti|mahti|lumi]
 # @option --version![=r2024b|r2024a|r2023b]
 install-matlab() {
     ansible-playbook \
@@ -43,7 +43,7 @@ install-matlab() {
 
 # @cmd Install MathWorks ServiceHost
 # @meta require-tools ansible-playbook
-# @option --system![puhti|lumi]
+# @option --system![puhti|mahti|lumi]
 # @option --version=2024.13.0.2
 install-servicehost() {
     local LATEST_VERSION
