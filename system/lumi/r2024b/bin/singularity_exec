@@ -17,8 +17,8 @@ fi
 #MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /dev/null:$HOME/.MathWorks/ServiceHost"
 
 # Bind managed mathworks servicehost
-if [ -d /appl/soft/math/mathworksservicehost ]; then
-    MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /appl/soft/math/mathworksservicehost"
+if [ -d /appl/local/csc/soft/math/mathworksservicehost ]; then
+    MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /appl/local/csc/soft/math/mathworksservicehost"
 
     # If there is a regular file blocking the MathWorks ServiceHost from installing, remove it.
     if [ -f "$HOME/.MathWorks/ServiceHost" ]; then
