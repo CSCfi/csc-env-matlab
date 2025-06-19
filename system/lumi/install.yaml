@@ -52,7 +52,7 @@
 
 - name: "Synchronize across LUMI Lustres"
   hosts:
-    - "group_lumi"
+    - "lumi"
   become: false
 
   tasks:

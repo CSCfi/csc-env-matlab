@@ -14,7 +14,17 @@ if [ -d "$LOCAL_SCRATCH" ]; then
 fi
 
 # Block MATLAB from installing ServiceHost (700 MB with 10k files per host).
-MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /dev/null:$HOME/.MathWorks/ServiceHost"
+#MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /dev/null:$HOME/.MathWorks/ServiceHost"
+
+# Bind managed mathworks servicehost
+if [ -d /appl/soft/math/mathworksservicehost ]; then
+    MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /appl/soft/math/mathworksservicehost"
+
+    # If there is a regular file blocking the MathWorks ServiceHost from installing, remove it.
+    if [ -f "$HOME/.MathWorks/ServiceHost" ]; then
+        rm -f "$HOME/.MathWorks/ServiceHost"
+    fi
+fi
 
 # Bind /run which is required by MATLAB
 MATLAB_SING_FLAGS="$MATLAB_SING_FLAGS -B /run:/run"

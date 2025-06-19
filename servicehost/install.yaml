@@ -2,6 +2,7 @@
   hosts:
     - "puhti"
     - "mahti"
+    - "lumi"
   become: false
 
   tasks:
@@ -40,3 +41,31 @@
         src: "{{ playbook_dir }}/templates/LatestInstall.info.j2"
         dest: "{{ appl_dir }}/mathworksservicehost/LatestInstall.info"
         group: "{{ group }}"
+
+- name: "Synchronize across LUMI Lustres"
+  hosts:
+    - "lumi"
+  become: false
+
+  tasks:
+    - name: "Create a matlab application directory"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "/pfs/lustrep1/{{ appl_dir }}/mathworksservicehost"
+        - "/pfs/lustrep3/{{ appl_dir }}/mathworksservicehost"
+        - "/pfs/lustrep4/{{ appl_dir }}/mathworksservicehost"
+
+    - name: "Synchronize installation"
+      ansible.builtin.command: |
+        rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
+      loop:
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/{{ version }}"
+          dest: "/pfs/lustrep1/{{ appl_dir }}/mathworksservicehost"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/{{ version }}"
+          dest: "/pfs/lustrep3/{{ appl_dir }}/mathworksservicehost"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/{{ version }}"
+          dest: "/pfs/lustrep4/{{ appl_dir }}/mathworksservicehost"

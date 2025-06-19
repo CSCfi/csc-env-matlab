@@ -25,6 +25,9 @@ else
 end
 setenv("MLM_LICENSE_FILE", license)
 
+-- Mathworks servicehost
+setenv("MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT", pathJoin(appl_dir, "mathworksservicehost"))
+
 -- Load message and license disclaimer
 loadmsg = "MATLAB\nVersion: " .. version .. "\nLicense: Academic\n----------\nThe terms of use of this software allow its use for only in teaching and academic research at a degree-granting institute. If you are unsure whether you are allowed to use the software, please unload this module now.\n\nIf you want to use your own license with the installation, please contact LUMI support for help.\n----------"
 
