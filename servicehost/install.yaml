@@ -36,10 +36,18 @@
         group: "{{ group }}"
         creates: "{{ appl_dir }}/mathworksservicehost/{{ version }}/bin"
 
+    - name: "Ensure correct permissions to jupyter env"
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/mathworksservicehost/{{ version }}"
+        mode: "u=rwX,g=rwX,o=rX"
+        state: "directory"
+        recurse: true
+
     - name: "Write LatestInstall.info"
       ansible.builtin.template:
         src: "{{ playbook_dir }}/templates/LatestInstall.info.j2"
         dest: "{{ appl_dir }}/mathworksservicehost/LatestInstall.info"
+        mode: "ug=rw,o=r"
         group: "{{ group }}"
 
 - name: "Synchronize across LUMI Lustres"
@@ -68,4 +76,15 @@
         - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/{{ version }}"
           dest: "/pfs/lustrep3/{{ appl_dir }}/mathworksservicehost"
         - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/{{ version }}"
+          dest: "/pfs/lustrep4/{{ appl_dir }}/mathworksservicehost"
+
+    - name: "Synchronize installation"
+      ansible.builtin.command: |
+        rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
+      loop:
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/LatestInstall.info"
+          dest: "/pfs/lustrep1/{{ appl_dir }}/mathworksservicehost"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/LatestInstall.info"
+          dest: "/pfs/lustrep3/{{ appl_dir }}/mathworksservicehost"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworksservicehost/LatestInstall.info"
           dest: "/pfs/lustrep4/{{ appl_dir }}/mathworksservicehost"
