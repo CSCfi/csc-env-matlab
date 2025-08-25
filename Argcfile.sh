@@ -2,37 +2,10 @@
 
 set -e
 
-# @cmd Build MATLAB container in SIF format
-# @meta require-tools apptainer
-# @option --version![=r2024b|r2024a|r2023b]
-# @option --proxy-version=0.23.1
-# @option --os-version=ubuntu22.04
-build-matlab-sif() {
-    cd ./containers/${argc_version}/${argc_os_version} && \
-    apptainer build \
-        --build-arg "MATLAB_PROXY_VERSION=${argc_proxy_version}" \
-        matlab.sif \
-        matlab.def
-}
-
-# @cmd Build MATLAB container in OCI format
-# @meta require-tools podman
-# @option --version![=r2024b|r2024a|r2023b]
-# @option --proxy-version=0.23.1
-# @option --os-version=ubuntu22.04
-build-matlab-oci() {
-    cd ./containers/${argc_version}/${argc_os_version} && \
-    podman build \
-        --build-arg "MATLAB_PROXY_VERSION=${argc_proxy_version}" \
-        --tag "localhost/matlab:${argc_version}" \
-        --file "Dockerfile" \
-        .
-}
-
 # @cmd Install MATLAB container and modulefiles
 # @meta require-tools ansible-playbook
 # @option --system![puhti|mahti|lumi]
-# @option --version![=r2024b|r2024a|r2023b]
+# @option --version![=r2024b|r2025a|r2024a|r2023b]
 install-matlab() {
     ansible-playbook \
         -i hosts.yaml \
