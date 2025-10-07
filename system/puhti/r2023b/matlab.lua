@@ -19,7 +19,7 @@ license_default = os.getenv("MLM_LICENSE_FILE")
 if license_default == nil or license_default == "" then
     license = "1766@license4.csc.fi"
 elseif license_default == "/opt/matlab/licenses/network.lic" then
-    license = "1766@license10.csc.fi"
+    license = "1766@license4.csc.fi"
 else
     license = license_default
 end

@@ -4,65 +4,60 @@
   become: false
 
   tasks:
-    - name: "Create a matlab application directory"
+    - name: "Directories"
       ansible.builtin.file:
-        path: "{{ appl_dir }}/{{ item }}"
+        path: "{{ item }}"
         state: "directory"
         mode: "ug=rwx,o=rx,g+s"
         group: "{{ group }}"
       loop:
-        - "matlab"
-        - "matlab/mps"
-        - "matlab/mps/{{ version }}"
-        - "matlab/mps/{{ version }}/bin"
+        - "{{ appl_dir }}/matlab"
+        - "{{ appl_dir }}/matlab/mps"
+        - "{{ appl_dir }}/matlab/mps/{{ version }}"
+        - "{{ appl_dir }}/matlab/mps/{{ version }}/bin"
+        - "{{ modulefiles_dir }}/matlab"
 
-    - name: "Copy the wrapper scripts"
+    - name: "Executable scripts"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}"
-        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/{{ item }}"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
-        - "apptainer_exec"
-        - "matlab"
-        - "mex"
-        - "matlab-proxy-app"
+        - src: "{{ playbook_dir }}/{{ version }}/bin/matlab"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab"
+        - src: "{{ playbook_dir }}/{{ version }}/bin/mex"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/mex"
+        - src: "{{ playbook_dir }}/{{ version }}/bin/matlab-proxy-app"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab-proxy-app"
+        - src: "{{ playbook_dir }}/{{ version }}/extract_binaries.sh"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
 
-    - name: "Copy the wrapper script templates"
+    - name: "Executable script templates"
       ansible.builtin.template:
-        src: "{{ playbook_dir }}/{{ version }}/bin/worker.j2"
-        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/worker"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
+      loop:
+        - src: "{{ playbook_dir }}/{{ version }}/bin/apptainer_exec.j2"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/apptainer_exec"
+        - src: "{{ playbook_dir }}/{{ version }}/bin/worker.j2"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/worker"
 
-    - name: "Create a matlab modulefiles directory"
-      ansible.builtin.file:
-        path: "{{ modulefiles_dir }}/matlab"
-        state: "directory"
-        mode: "ug=rwx,o=rx,g+s"
-        group: "{{ group }}"
-
-    - name: "Copy the modulefile"
+    - name: "Regular files"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/matlab.lua"
-        dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
+      loop:
+        - src: "{{ playbook_dir }}/{{ version }}/matlab.lua"
+          dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
 
-    - name: "Copy script to extract binaries for MATLAB Parallel Server"
-      ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/extract_binaries.sh"
-        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
-        mode: "ug=rwx,o=rx"
-        group: "{{ group }}"
-
-    - name: "Copy the container"
-      ansible.builtin.copy:
-        src: "{{ inventory_dir }}/containers/{{ version }}/ubuntu22.04/matlab.sif"
-        dest: "{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"
-        mode: "ug=rwx,o=rx"
-        group: "{{ group }}"
-      tags:
-        - "large"
-
-    # TODO: invoke extract_binaries.sh
+    - name: "Container file dummy. Real container should be scp'ed to its place."
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"
+        state: "touch"
+        modification_time: "preserve"
+        access_time: "preserve"
