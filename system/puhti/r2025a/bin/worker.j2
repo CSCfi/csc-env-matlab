@@ -3,8 +3,11 @@
 # MATLAB license
 export MLM_LICENSE_FILE="1766@license4.csc.fi"
 
-# MATLAB executes this script directly.
-#export MATLAB_SING_IMAGE="/appl/soft/math/matlab/mps/{{ version }}/matlab.sif"
+# Increase virtual memory to the hard limit (required on login nodes).
+ulimit -v "$(ulimit -Hv)"
 
 # Call matlab with the right arguments
-"/appl/soft/math/matlab/mps/{{ version }}/bin/apptainer_exec" worker "$@"
+apptainer --silent exec \
+    --bind="/run/user,/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH,/fmi,/appl/data" \
+    --nv \
+    "/appl/soft/math/matlab/mps/{{ version }}/matlab.sif" worker "$@"
