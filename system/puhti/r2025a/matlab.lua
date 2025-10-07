@@ -11,15 +11,10 @@ bin_dir = pathJoin(appl_dir, "matlab", "mps", version, "bin")
 prepend_path("PATH", bin_dir)
 
 -- Set license
-license_default = os.getenv("MLM_LICENSE_FILE")
-if license_default == nil or license_default == "" then
-    license = "1766@license4.csc.fi"
-elseif license_default == "/opt/matlab/licenses/network.lic" then
-    license = "1766@license4.csc.fi"
-else
-    license = license_default
-end
+license = os.getenv("MLM_LICENSE_FILE") or "1766@license4.csc.fi"
 setenv("MLM_LICENSE_FILE", license)
 
--- Mathworks servicehost
-setenv("MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT", pathJoin(appl_dir, "mathworksservicehost"))
+-- Load message and license disclaimer
+if (mode() == "load" and license == "1766@license4.csc.fi") then
+    LmodMessage("MATLAB  " .. version .. "\nLicense: Academic (" .. license .. ")\n----------\nThe terms of use of this software allow its use for only the affiliates (staff and students) of Finnish higher education institutions. If you are unsure whether you are allowed to use the software, please unload this module now.\n----------")
+end
