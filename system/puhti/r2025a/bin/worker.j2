@@ -8,6 +8,7 @@ ulimit -v "$(ulimit -Hv)"
 
 # Call matlab with the right arguments
 apptainer --silent exec \
-    --bind="/run/user,/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH,/fmi,/appl/data" \
+    --bind="/run/user" \
+    --bind="/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH,/fmi,/appl/data" \
     --nv \
     "/appl/soft/math/matlab/mps/{{ version }}/matlab.sif" worker "$@"
