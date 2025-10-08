@@ -3,9 +3,12 @@
 # Increase virtual memory to the hard limit (required on login nodes).
 ulimit -v "$(ulimit -Hv)"
 
+# Print directory if it exists
+ifexists() { [ -d "$1" ] && echo "$1"; }
+
 # Exec matlab container
 apptainer --silent exec \
     --bind="/run/user" \
-    --bind="/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH,/fmi,/appl/data" \
+    --bind="/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH,$(ifexists /fmi),$(ifexists /appl/data)" \
     --nv \
     "/appl/soft/math/matlab/mps/{{ version }}/matlab.sif" "$@"
