@@ -1,14 +1,11 @@
 #!/bin/bash
 
-# MATLAB license
-export MLM_LICENSE_FILE="1766@license4.csc.fi"
-
 # Increase virtual memory to the hard limit (required on login nodes).
 ulimit -v "$(ulimit -Hv)"
 
-# Call matlab with the right arguments
+# Exec matlab container
 apptainer --silent exec \
     --bind="/run/user" \
     --bind="/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH,/fmi,/appl/data" \
     --nv \
-    "/appl/soft/math/matlab/mps/{{ version }}/matlab.sif" worker "$@"
+    "/appl/soft/math/matlab/mps/{{ version }}/matlab.sif" "$@"
