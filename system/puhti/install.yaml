@@ -1,6 +1,7 @@
 - name: "Install matlab environment"
   hosts:
     - "puhti"
+    - "mahti"
   become: false
 
   tasks:
