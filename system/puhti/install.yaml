@@ -62,3 +62,4 @@
         state: "touch"
         modification_time: "preserve"
         access_time: "preserve"
+        mode: "ug=rwx,o=rx"
