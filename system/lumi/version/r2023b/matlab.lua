@@ -10,10 +10,6 @@ appl_dir = "/appl/local/csc/soft/math"
 bin_dir = pathJoin(appl_dir, "matlab", version, "bin")
 prepend_path("PATH", bin_dir)
 
--- Path to the matlab container image run using `apptainer_wrapper`.
-image = pathJoin(appl_dir, "matlab", version, "matlab.sif")
-setenv("MATLAB_SING_IMAGE", image)
-
 -- Set license
 license_default = os.getenv("MLM_LICENSE_FILE")
 if license_default == nil or license_default == "" then
