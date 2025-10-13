@@ -17,7 +17,7 @@
 
     - name: "Copy the wrapper scripts"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/bin/{{ item }}"
+        src: "{{ playbook_dir }}/version/{{ version }}/bin/{{ item }}"
         dest: "{{ appl_dir }}/matlab/{{ version }}/bin/{{ item }}"
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
@@ -36,7 +36,7 @@
 
     - name: "Copy the modulefile"
       ansible.builtin.copy:
-        src: "{{ playbook_dir }}/{{ version }}/matlab.lua"
+        src: "{{ playbook_dir }}/version/{{ version }}/matlab.lua"
         dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
