@@ -1,2 +1,2 @@
 #!/bin/bash
-apptainer_exec matlab-proxy-app
+matlab-apptainer-exec matlab-proxy-app

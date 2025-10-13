@@ -27,8 +27,6 @@
       loop:
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab"
           dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab"
-        - src: "{{ playbook_dir }}/version/{{ version }}/bin/mex"
-          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/mex"
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-proxy-app"
           dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab-proxy-app"
         - src: "{{ playbook_dir }}/version/{{ version }}/extract_binaries.sh"
@@ -41,8 +39,8 @@
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
-        - src: "{{ playbook_dir }}/version/{{ version }}/bin/apptainer_exec.j2"
-          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/apptainer_exec"
+        - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-apptainer-exec.j2"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab-apptainer-exec"
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/worker.j2"
           dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/worker"
 
