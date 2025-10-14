@@ -3,5 +3,5 @@
 # Exec matlab container
 singularity --silent exec \
     --bind="/run/user" \
-    --bind="/pfs,/users,/projappl,/scratch,/project,$TMPDIR,$LOCAL_SCRATCH" \
+    --bind="/pfs,/users,/projappl,/scratch,/project,/flash,$TMPDIR,$LOCAL_SCRATCH" \
     "/appl/local/csc/soft/math/matlab/{{ version }}/matlab.sif" "$@"
