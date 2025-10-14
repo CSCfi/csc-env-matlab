@@ -1,2 +1,2 @@
 #!/bin/bash
-singularity_exec matlab "$@"
+matlab-singularity-exec matlab "$@"

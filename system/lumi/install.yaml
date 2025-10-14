@@ -25,8 +25,6 @@
       loop:
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab"
           dest: "{{ appl_dir }}/matlab/{{ version }}/bin/matlab"
-        - src: "{{ playbook_dir }}/version/{{ version }}/bin/mex"
-          dest: "{{ appl_dir }}/matlab/{{ version }}/bin/mex"
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-proxy-app"
           dest: "{{ appl_dir }}/matlab/{{ version }}/bin/matlab-proxy-app"
 
@@ -37,8 +35,8 @@
         mode: "ug=rwx,o=rx"
         group: "{{ group }}"
       loop:
-        - src: "{{ playbook_dir }}/version/{{ version }}/bin/singularity_exec.j2"
-          dest: "{{ appl_dir }}/matlab/{{ version }}/bin/singularity_exec"
+        - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-singularity-exec.j2"
+          dest: "{{ appl_dir }}/matlab/{{ version }}/bin/matlab-singularity-exec"
 
     - name: "Regular files"
       ansible.builtin.copy:

@@ -1,2 +1,2 @@
 #!/bin/bash
-singularity_exec matlab-proxy-app
+matlab-singularity-exec matlab-proxy-app
