@@ -1,4 +1,4 @@
-function t = funcParallel(n)
+function t = funcSerial(n)
 t0 = tic;
 for idx = 1:n
     pause(1);
