@@ -11,11 +11,11 @@ ifexists() { [ -d "$1" ] && echo "$1"; }
 export MLM_LICENSE_FILE
 
 # Path to image file. Defaults to CSC image.
-: "${MATLAB_SING_IMAGE:="/appl/soft/math/matlab/mps/{{ version }}/matlab.sif"}"
+: "${MATLAB_SIF_IMAGE:="/appl/soft/math/matlab/mps/{{ version }}/matlab.sif"}"
 
 # Call matlab with the right arguments
 apptainer --silent exec \
     --bind="/run/user" \
     --bind="/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH,$(ifexists /fmi),$(ifexists /appl/data)" \
     --nv \
-    "${MATLAB_SING_IMAGE}" worker "$@"
+    "${MATLAB_SIF_IMAGE}" worker "$@"
