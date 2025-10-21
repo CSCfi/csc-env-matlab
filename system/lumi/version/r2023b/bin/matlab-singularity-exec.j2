@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# Path to image file. Defaults to CSC image.
+: "${MATLAB_SIF_IMAGE:="/appl/local/csc/soft/math/matlab/{{ version }}/matlab.sif"}"
+
 # Exec matlab container
 singularity --silent exec \
     --bind="/run/user" \
     --bind="/pfs,/users,/projappl,/scratch,/project,/flash,$TMPDIR,$LOCAL_SCRATCH" \
-    "/appl/local/csc/soft/math/matlab/{{ version }}/matlab.sif" "$@"
+    "${MATLAB_SIF_IMAGE}" "$@"
