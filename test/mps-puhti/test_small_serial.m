@@ -7,5 +7,5 @@ c.NumThreads = 1;                                       % --cpus-per-task=<NumTh
 c.AdditionalProperties.MemPerCPU = '4g';                % --mem-per-cpu=<MemPerCPU>
 c.AdditionalProperties.GPUCard = '';                    % --gres=gpu:<GPUCard>:<GPUsPerNode>
 c.AdditionalProperties.GPUsPerNode = 0;
-j = batch(c, 'funcSerial', 1, {1}, 'CurrentFolder', '.', 'AutoAddClientPath', false);
+j = batch(c, @funcSerial, 1, {1}, 'CurrentFolder', '.', 'AutoAddClientPath', false);
 end
