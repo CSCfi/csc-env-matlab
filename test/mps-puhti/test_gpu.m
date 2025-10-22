@@ -1,5 +1,5 @@
 function j = test_gpu()
-c = parcluster;
+c = parcluster();
 c.AdditionalProperties.ComputingProject = 'project_2001659';  % --account=<ComputingProject>
 c.AdditionalProperties.Partition = 'gputest';               % --partition=<Partition>
 c.AdditionalProperties.WallTime = '00:15:00';           % --time=<WallTime>
