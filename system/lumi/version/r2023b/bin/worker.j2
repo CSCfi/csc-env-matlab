@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# MATLAB license. Defaults to CSC license.
+: "${MLM_LICENSE_FILE:="1766@license10.csc.fi"}"
+export MLM_LICENSE_FILE
+
+# Path to image file. Defaults to CSC image.
+: "${MATLAB_SIF_IMAGE:="/appl/local/csc/soft/math/matlab/{{ version }}/matlab.sif"}"
+
+# Call matlab with the right arguments
+apptainer --silent exec \
+    --bind="/run/user" \
+    --bind="/pfs,/users,/projappl,/scratch,/project,/flash,$TMPDIR,$LOCAL_SCRATCH" \
+    "${MATLAB_SIF_IMAGE}" worker "$@"
