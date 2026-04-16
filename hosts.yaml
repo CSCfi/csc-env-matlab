@@ -28,3 +28,12 @@ lumi:
     group: "appl_csc"
     appl_dir: "/appl/local/csc/soft/math"
     modulefiles_dir: "/appl/local/csc/modulefiles"
+roihu_cpu:
+  hosts:
+    roihu-cpu-inst.csc.fi:
+      ansible_connection: "ssh"
+      ansible_python_interpreter: "/usr/bin/python3.9"
+  vars:
+    group: "r_installation_general"
+    appl_dir: "/appl/soft/manual/general/x86_64"
+    modulefiles_dir: "/appl/modulefiles/manual/general/x86_64"

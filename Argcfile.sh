@@ -4,7 +4,7 @@ set -e
 
 # @cmd Install MATLAB container and modulefiles
 # @meta require-tools ansible-playbook
-# @option --system![puhti|mahti|lumi]
+# @option --system![puhti|mahti|lumi|roihu_cpu]
 # @option --version![=r2024b|r2025a|r2024a|r2023b]
 install-matlab() {
     ansible-playbook \
@@ -24,8 +24,8 @@ print-latest-servicehost() {
 
 # @cmd Install MathWorks ServiceHost
 # @meta require-tools ansible-playbook
-# @option --system![puhti|mahti|lumi]
-# @option --version![2025.9.0.2|2025.3.0.2|2024.13.0.2]
+# @option --system![puhti|mahti|lumi|roihu_cpu]
+# @option --version![2026.3.0.6|2025.9.0.2|2025.3.0.2|2024.13.0.2]
 install-servicehost() {
     local LATEST_VERSION
     LATEST_VERSION=$(curl --silent https://raw.githubusercontent.com/mathworks-ref-arch/administer-mathworks-service-host/refs/heads/main/admin-scripts/linux/admin-controlled-installation/latest_release.txt)
