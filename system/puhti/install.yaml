@@ -2,7 +2,6 @@
   hosts:
     - "puhti"
     - "mahti"
-    - "roihu_cpu"
   become: false
 
   tasks:
