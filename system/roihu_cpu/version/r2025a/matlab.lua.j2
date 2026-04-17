@@ -7,7 +7,7 @@ version = myModuleVersion()
 appl_dir = "{{ appl_dir }}"
 
 -- Add scripts to the path.
-bin_dir = pathJoin(appl_dir, "matlab", "mps", version, "bin")
+bin_dir = pathJoin(appl_dir, "matlab", version, "bin")
 prepend_path("PATH", bin_dir)
 
 -- Set license

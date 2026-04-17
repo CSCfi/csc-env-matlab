@@ -11,7 +11,7 @@ ulimit -v "$(ulimit -Hv)"
 export MLM_LICENSE_FILE
 
 # Path to image file. Defaults to CSC image.
-: "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"}"
+: "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/{{ version }}/matlab.sif"}"
 
 # Call matlab with the right arguments
 apptainer --silent exec \

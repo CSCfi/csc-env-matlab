@@ -12,9 +12,8 @@
         group: "{{ group }}"
       loop:
         - "{{ appl_dir }}/matlab"
-        - "{{ appl_dir }}/matlab/mps"
-        - "{{ appl_dir }}/matlab/mps/{{ version }}"
-        - "{{ appl_dir }}/matlab/mps/{{ version }}/bin"
+        - "{{ appl_dir }}/matlab/{{ version }}"
+        - "{{ appl_dir }}/matlab/{{ version }}/bin"
         - "{{ modulefiles_dir }}/matlab"
 
     - name: "Executable scripts"
@@ -25,11 +24,11 @@
         group: "{{ group }}"
       loop:
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab"
-          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab"
+          dest: "{{ appl_dir }}/matlab/{{ version }}/bin/matlab"
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-proxy-app"
-          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab-proxy-app"
+          dest: "{{ appl_dir }}/matlab/{{ version }}/bin/matlab-proxy-app"
         - src: "{{ playbook_dir }}/version/{{ version }}/extract_binaries.sh"
-          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
+          dest: "{{ appl_dir }}/matlab/{{ version }}/extract_binaries.sh"
 
     - name: "Executable script templates"
       ansible.builtin.template:
@@ -39,9 +38,9 @@
         group: "{{ group }}"
       loop:
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-apptainer-exec.j2"
-          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab-apptainer-exec"
+          dest: "{{ appl_dir }}/matlab/{{ version }}/bin/matlab-apptainer-exec"
         - src: "{{ playbook_dir }}/version/{{ version }}/bin/worker.j2"
-          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/worker"
+          dest: "{{ appl_dir }}/matlab/{{ version }}/bin/worker"
 
     - name: "Regular files"
       ansible.builtin.template:
@@ -55,7 +54,7 @@
 
     - name: "Container file dummy. Real container should be scp'ed to its place."
       ansible.builtin.file:
-        path: "{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"
+        path: "{{ appl_dir }}/matlab/{{ version }}/matlab.sif"
         state: "touch"
         modification_time: "preserve"
         access_time: "preserve"

@@ -7,7 +7,7 @@ ulimit -v "$(ulimit -Hv)"
 # ifexists() { [ -d "$1" ] && echo "$1"; }
 
 # Path to image file. Defaults to CSC image.
-: "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"}"
+: "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/{{ version }}/matlab.sif"}"
 
 # Exec matlab container
 apptainer --silent exec \
