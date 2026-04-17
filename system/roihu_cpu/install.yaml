@@ -1,0 +1,64 @@
+- name: "Install matlab environment"
+  hosts:
+    - "puhti"
+    - "mahti"
+    - "roihu_cpu"
+  become: false
+
+  tasks:
+    - name: "Directories"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "{{ appl_dir }}/matlab"
+        - "{{ appl_dir }}/matlab/mps"
+        - "{{ appl_dir }}/matlab/mps/{{ version }}"
+        - "{{ appl_dir }}/matlab/mps/{{ version }}/bin"
+        - "{{ modulefiles_dir }}/matlab"
+
+    - name: "Executable scripts"
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+      loop:
+        - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab"
+        - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-proxy-app"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab-proxy-app"
+        - src: "{{ playbook_dir }}/version/{{ version }}/extract_binaries.sh"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/extract_binaries.sh"
+
+    - name: "Executable script templates"
+      ansible.builtin.template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "ug=rwx,o=rx"
+        group: "{{ group }}"
+      loop:
+        - src: "{{ playbook_dir }}/version/{{ version }}/bin/matlab-apptainer-exec.j2"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/matlab-apptainer-exec"
+        - src: "{{ playbook_dir }}/version/{{ version }}/bin/worker.j2"
+          dest: "{{ appl_dir }}/matlab/mps/{{ version }}/bin/worker"
+
+    - name: "Regular files"
+      ansible.builtin.template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: "ug=rw,o=r"
+        group: "{{ group }}"
+      loop:
+        - src: "{{ playbook_dir }}/version/{{ version }}/matlab.lua.j2"
+          dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
+
+    - name: "Container file dummy. Real container should be scp'ed to its place."
+      ansible.builtin.file:
+        path: "{{ appl_dir }}/matlab/mps/{{ version }}/matlab.sif"
+        state: "touch"
+        modification_time: "preserve"
+        access_time: "preserve"
+        mode: "ug=rwx,o=rx"
