@@ -13,13 +13,13 @@
 
     - name: "Create Mathworks ServiceHost directory"
       ansible.builtin.file:
-        path: "{{ appl_dir }}/{{ item }}"
+        path: "{{ item }}"
         state: "directory"
         mode: "ug=rwx,o=rx,g+s"
         group: "{{ group }}"
       loop:
-        - "mathworksservicehost"
-        - "mathworksservicehost/{{ version }}"
+        - "{{ appl_dir/mathworksservicehost"
+        - "{{ appl_dir}}/mathworksservicehost/{{ version }}"
 
     - name: "Download the mathworks servicehost"
       ansible.builtin.get_url:
