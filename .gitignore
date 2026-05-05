@@ -1,7 +1,7 @@
-build/
-installer/
+.tmp/
 *.sha256
 *.sif
 *.tar
 *.tar.gz
-.tmp/
+*.sqfs
+*.zip
