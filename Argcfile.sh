@@ -5,7 +5,7 @@ set -e
 # @cmd Install MATLAB container and modulefiles
 # @meta require-tools ansible-playbook
 # @option --system![puhti|mahti|lumi|roihu_cpu]
-# @option --version![=r2025b|r2025a|r2024b|r2024a|r2023b]
+# @option --version![=r2026a|r2025b|r2025a|r2024b|r2024a|r2023b]
 install-matlab() {
     ansible-playbook \
         -i hosts.yaml \
