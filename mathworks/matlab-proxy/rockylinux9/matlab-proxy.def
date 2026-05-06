@@ -7,7 +7,8 @@ From: {{MATLAB_SIF}}
 %post
     dnf update -y
     dnf install -y epel-release
-    dnf install -y python3.11 python3.11-pip xorg-x11-server-Xvfb fluxbox
+    # TODO: fluxbox is not available
+    dnf install -y python3.11 python3.11-pip xorg-x11-server-Xvfb
     dnf clean all -y
     python3.11 -m venv /opt/venv
     export PATH=/opt/venv/bin:$PATH
