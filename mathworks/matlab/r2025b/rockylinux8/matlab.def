@@ -15,7 +15,8 @@ From: rockylinux/rockylinux:8.10
     export TZ="Etc/UTC"
 
     # Install dependencies
-    dnf update -y
+    dnf install -y unbound-libs
+    dnf update -y --exclude=unbound-libs
     dnf install -y $(cat /opt/base-dependencies.txt)
     dnf clean all -y
 
