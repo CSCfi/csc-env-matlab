@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Increase virtual memory to the hard limit (required on login nodes).
+ulimit -v "$(ulimit -Hv)"
+
+# Print directory if it exists
+# ifexists() { [ -d "$1" ] && echo "$1"; }
+
+# Path to image file. Defaults to CSC image.
+: "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/{{ version }}/matlab.sif"}"
+
+# Exec matlab container
+apptainer --silent exec \
+    --bind="/run/user" \
+    --bind="/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH" \
+    --bind="{{ appl_dir }}/mathworks/servicehost/mathworksservicehost.sqfs:/opt/mathworksservicehost:image-src=/" \
+    --env="MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=/opt/mathworksservicehost" \
+    "${MATLAB_SIF_IMAGE}" "$@"
