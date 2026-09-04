@@ -52,3 +52,8 @@ unzip.x86_64
 which.x86_64
 zlib.x86_64
 wget.x86_64
+curl.x86_64
+ca-certificates.noarch
+gcc.x86_64
+gcc-c++.x86_64
+gcc-gfortran.x86_64
