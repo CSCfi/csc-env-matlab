@@ -16,5 +16,6 @@ export MLM_LICENSE_FILE
 # Call matlab with the right arguments
 apptainer --silent exec \
     --bind="/run/user" \
-    --bind="/users,/projappl,/scratch,$TMPDIR,$LOCAL_SCRATCH" \
+    --bind="/users,/projappl,/scratch,/dataset,$TMPDIR,$LOCAL_SCRATCH" \
+    --nv \
     "${MATLAB_SIF_IMAGE}" worker "$@"
