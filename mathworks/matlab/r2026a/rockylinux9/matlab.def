@@ -16,7 +16,7 @@ From: rockylinux/rockylinux:9.7
 
     # Install dependencies
     dnf update -y
-    dnf install -y $(cat /opt/base-dependencies.txt)
+    dnf install -y --allowerasing $(cat /opt/base-dependencies.txt)
     dnf clean all -y
 
     #[ -s /etc/machine-id ] || dbus-uuidgen > /etc/machine-id
