@@ -16,6 +16,7 @@ From: rockylinux/rockylinux:9.8
 
     # Install dependencies
     dnf update -y
+    dnf install -y libatomic
     dnf install -y --allowerasing $(cat /opt/base-dependencies.txt)
     dnf clean all -y
 
