@@ -1,7 +1,5 @@
 - name: "Install Mathworks ServiceHost"
   hosts:
-    - "puhti"
-    - "mahti"
     - "lumi"
     - "roihu_cpu"
   become: false
