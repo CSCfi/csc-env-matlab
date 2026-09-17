@@ -19,7 +19,6 @@ From: rockylinux/rockylinux:9.8
     dnf install -y --allowerasing $(cat /opt/base-dependencies.txt)
     dnf clean all -y
 
-    #[ -s /etc/machine-id ] || dbus-uuidgen > /etc/machine-id
     [ -d /usr/share/X11/xkb ] || mkdir -p /usr/share/X11/xkb
 
     # Install MATLAB
