@@ -3,9 +3,6 @@
 # Increase virtual memory to the hard limit (required on login nodes).
 ulimit -v "$(ulimit -Hv)"
 
-# Print directory if it exists
-# ifexists() { [ -d "$1" ] && echo "$1"; }
-
 # Path to image file. Defaults to CSC image.
 : "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/{{ version }}/matlab.sif"}"
 
