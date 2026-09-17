@@ -9,6 +9,9 @@ ulimit -v "$(ulimit -Hv)"
 # Path to image file. Defaults to CSC image.
 : "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/{{ version }}/matlab.sif"}"
 
+# Avoid passing LD_PRELOAD into Apptainer
+export APPTAINERENV_LD_PRELOAD=""
+
 # Exec matlab container
 apptainer --silent exec \
     --bind="/run/user" \
