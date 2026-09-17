@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Increase virtual memory to the hard limit (required on login nodes).
+ulimit -v "$(ulimit -Hv)"
+
+# Path to image file. Defaults to CSC image.
+: "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/{{ version }}/matlab.sif"}"
+
+# Avoid passing LD_PRELOAD into Apptainer
+export APPTAINERENV_LD_PRELOAD=""
+
+# Exec matlab container
+apptainer --silent exec \
+    --bind="/run/user" \
+    --bind="/users,/projappl,/scratch,/dataset,$TMPDIR,$LOCAL_SCRATCH" \
+    --nv \
+    "${MATLAB_SIF_IMAGE}" "$@"
