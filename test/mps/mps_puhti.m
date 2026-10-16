@@ -11,15 +11,15 @@ else
 end
 
 % Path to where the ZIP file is downloaded.
-confzip = fullfile(confroot, "mps_puhti.zip");
+confzip = fullfile(confroot, "mps_roihu.zip");
 delete(confzip);  % remove previous zipfile
 
 % Path to the directory where configuration files are extracted.
-confdir = fullfile(confroot, "mps_puhti");
+confdir = fullfile(confroot, "mps_roihu");
 rmdir(confdir, 's');  % remove previous config directory
 
 % Download the configuration files as a ZIP file.
-websave(confzip, "https://github.com/CSCfi/csc-env-matlab/raw/refs/heads/main/config/mps_puhti.zip")
+websave(confzip, "https://github.com/CSCfi/csc-env-matlab/raw/refs/heads/main/config/mps_roihu.zip")
 
 % Extract the configuration files to the configuration directory.
 unzip(confzip, confdir)
