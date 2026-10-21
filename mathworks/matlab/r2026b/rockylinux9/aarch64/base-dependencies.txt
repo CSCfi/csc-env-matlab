@@ -42,3 +42,8 @@ unzip.aarch64
 wget.aarch64
 which.aarch64
 zlib.aarch64
+curl.aarch64
+ca-certificates.noarch
+gcc.aarch64
+gcc-c++.aarch64
+gcc-gfortran.aarch64
