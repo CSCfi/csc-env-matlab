@@ -1,7 +1,6 @@
 - name: "Install Mathworks ServiceHost"
   hosts:
     - "lumi"
-    - "roihu_cpu"
   become: false
 
   tasks:
