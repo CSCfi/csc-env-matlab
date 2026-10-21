@@ -14,7 +14,7 @@
         - "{{ appl_dir }}/matlab"
         - "{{ appl_dir }}/matlab/{{ version }}"
         - "{{ appl_dir }}/matlab/{{ version }}/bin"
-        - "{{ modulefiles_dir }}/matlab"
+        - "{{ modulefiles_dir }}/.matlab"
 
     - name: "Executable scripts"
       ansible.builtin.copy:
@@ -50,7 +50,7 @@
         group: "{{ group }}"
       loop:
         - src: "{{ playbook_dir }}/version/{{ version }}/matlab.lua.j2"
-          dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
+          dest: "{{ modulefiles_dir }}/.matlab/{{ version }}.lua"
 
     - name: "Container file dummy. Real container should be scp'ed to its place."
       ansible.builtin.file:
