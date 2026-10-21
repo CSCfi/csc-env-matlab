@@ -1,0 +1,28 @@
+Bootstrap: docker
+From: rockylinux/rockylinux:9.8
+
+%files
+    base-dependencies.txt /opt/base-dependencies.txt
+    mpm_input.txt /opt/mpm_input.txt
+
+%post
+    # Add fake commands
+    cp /usr/bin/true /usr/sbin/useradd
+    cp /usr/bin/true /usr/sbin/groupadd
+
+    # Build environment
+    export LANG=en_us.UTF-8
+    export TZ="Etc/UTC"
+
+    # Install dependencies
+    dnf update -y
+    dnf install -y --allowerasing $(cat /opt/base-dependencies.txt)
+    dnf clean all -y
+
+    [ -d /usr/share/X11/xkb ] || mkdir -p /usr/share/X11/xkb
+
+    # TODO: Install MATLAB
+
+%environment
+    export LANG=en_us.UTF-8
+    export TZ="Etc/UTC"
