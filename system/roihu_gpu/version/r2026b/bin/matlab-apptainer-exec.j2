@@ -9,6 +9,8 @@ ulimit -v "$(ulimit -Hv)"
 # Avoid passing LD_PRELOAD into Apptainer
 export APPTAINERENV_LD_PRELOAD=""
 
+export APPTAINERENV_PREPEND_PATH=/opt/matlab/bin:
+
 # Exec matlab container
 apptainer --silent exec \
     --bind="/run/user" \
