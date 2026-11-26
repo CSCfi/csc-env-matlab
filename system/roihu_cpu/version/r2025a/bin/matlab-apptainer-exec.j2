@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Increase virtual memory to the hard limit (required on login nodes).
-ulimit -v "$(ulimit -Hv)"
-
 # Path to image file. Defaults to CSC image.
 : "${MATLAB_SIF_IMAGE:="{{ appl_dir }}/matlab/{{ version }}/matlab.sif"}"
 
