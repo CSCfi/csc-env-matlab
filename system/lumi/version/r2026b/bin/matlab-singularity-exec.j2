@@ -3,6 +3,8 @@
 # Path to image file. Defaults to CSC image.
 : "${MATLAB_SIF_IMAGE:="/appl/local/csc/soft/math/matlab/{{ version }}/matlab.sif"}"
 
+export SINGULARITYENV_PREPEND_PATH=/opt/matlab/bin:
+
 # Exec matlab container
 singularity --silent exec \
     --bind="/run/user" \
