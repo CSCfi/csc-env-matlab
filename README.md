@@ -7,9 +7,35 @@ The installation also includes the [MATLAB Proxy](https://github.com/mathworks/m
 We also install and use the [administered MathWorks Service Host](https://github.com/mathworks-ref-arch/administer-mathworks-service-host/).
 
 We use Ansible playbooks to install the containerized MATLAB on the clusters.
-Commands to build the containers and install the MATLAB environment are in the `Argcfile.sh` and we can invoke them using [argc](https://github.com/sigoden/argc).
-Use the `argc --help` for more information.
 The MathWorks ServiceHost is installed with the `servicehost.yaml` playbook (see below).
+
+## Install MATLAB on a cluster
+
+Run the per-system playbook from the repository root. Install into the `-l` system and the `version` you name:
+
+```bash
+ansible-playbook -i hosts.yaml -l <lumi|roihu_cpu|roihu_gpu> -e version=<release> system/<system>/install.yaml
+```
+
+For example, to install R2025a on Roihu CPU:
+
+```bash
+ansible-playbook -i hosts.yaml -l roihu_cpu -e version=r2025a system/roihu_cpu/install.yaml
+```
+
+The `version` must have a directory at `system/<system>/version/<release>/`. List the available releases with:
+
+```bash
+ls system/<system>/version/
+```
+
+Dry-run first to see what would change on the target, without changing anything:
+
+```bash
+ansible-playbook --check --diff -i hosts.yaml -l <system> -e version=<release> system/<system>/install.yaml
+```
+
+These playbooks write to shared `/appl` trees on production hosts. Run them only with explicit approval, and check the target system and version first.
 
 ## Build and run the MATLAB container
 

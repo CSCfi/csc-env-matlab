@@ -14,8 +14,7 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 
 ## Layout
 
-- `Argcfile.sh`: entry point for all tasks, run through [argc](https://github.com/sigoden/argc). Run `argc --help` to list commands.
-  - `install-matlab --system <lumi|roihu_cpu|roihu_gpu> --version <release>`: runs `system/<system>/install.yaml` with `hosts.yaml`.
+- Install playbooks are run directly with `ansible-playbook` (see README.md): `system/<system>/install.yaml` with `-i hosts.yaml -l <system> -e version=<release>`.
 - `hosts.yaml`: inventory. Hostnames, interpreter paths, group, and install dirs per system.
 - `system/<system>/install.yaml`: per-system Ansible playbook. It creates directories, copies scripts, and runs the version-specific install.
 - `system/<system>/version/<release>/`: per-release files. `matlab.lua` or `matlab.lua.j2` is the modulefile, `extract_binaries.sh` extracts binaries, and `bin/` holds launch wrappers (`matlab`, `matlab-proxy-app`, `worker.j2`, `matlab-apptainer-exec.j2` or `matlab-singularity-exec.j2`). Files with `.j2` are Jinja2 templates.
@@ -28,7 +27,7 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 
 ## Conventions
 
-- Adding a MATLAB release means adding `system/<system>/version/<release>/` for each system it targets, and registering the release in the `--version` list in `Argcfile.sh`. Copy the closest existing release directory rather than writing from scratch.
+- Adding a MATLAB release means adding `system/<system>/version/<release>/` for each system it targets, . Copy the closest existing release directory rather than writing from scratch.
 - Keep the `system/*/version/*` layout consistent across systems. The three systems differ by architecture and paths, which `hosts.yaml` holds.
 - Templates (`.j2`) are rendered by Ansible. Edit the template, not any rendered output.
 - Shared install directories are group-writable with the setgid bit (`ug=rwx,o=rx,g+s`). Keep that mode when adding directories.
@@ -36,7 +35,7 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 
 ## Safety
 
-- The playbooks run against production login and installation hosts (`*.csc.fi`) and write to shared `/appl` trees. Do not run `install-matlab` or `install-servicehost` without explicit user approval, and always check the target system and version first.
+- The playbooks run against production login and installation hosts (`*.csc.fi`) and write to shared `/appl` trees. Do not run `ansible-playbook` on `system/*/install.yaml` or `servicehost.yaml` without explicit user approval, and always check the target system and version first.
 - Do not edit or delete files under an installed version directory on a cluster. Changes go through the repo and a new install.
 - Do not put license files, credentials, or host secrets in the repo.
 
