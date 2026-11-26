@@ -7,22 +7,12 @@ From: {{MATLAB_SIF}}
 %post
     dnf update -y
     dnf install -y epel-release
-    dnf install -y python3.11 python3.11-pip xorg-x11-server-Xvfb
-
-    # Install fluxbox (not available from EPEL directly)
-    dnf install -y rpm-build dnf-plugins-core wget
-    cd /opt
-    wget https://kojipkgs.fedoraproject.org/packages/fluxbox/1.3.7/26.fc41/src/fluxbox-1.3.7-26.fc41.src.rpm
-    dnf builddep -y fluxbox-1.3.7-26.fc41.src.rpm
-    rpmbuild --rebuild fluxbox-1.3.7-26.fc41.src.rpm
-    dnf install -y ~/rpmbuild/RPMS/x86_64/fluxbox-1.3.7-*.el9.*.rpm
-    cd /
-
+    dnf install -y python3.14 python3.14-pip xorg-x11-server-Xvfb openbox
     dnf clean all -y
-    python3.11 -m venv /opt/venv
+    python3.14 -m venv /opt/venv
     export PATH=/opt/venv/bin:$PATH
     python3 -m pip install --upgrade pip
-    python3 -m pip install --no-cache-dir matlab-proxy==0.27.1
+    python3 -m pip install --no-cache-dir matlab-proxy==0.36.0
 
 %environment
     export PYTHONNOUSERSITE="1"
