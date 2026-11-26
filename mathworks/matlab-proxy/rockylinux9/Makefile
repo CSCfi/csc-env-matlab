@@ -2,7 +2,7 @@ TMPDIR ?= /tmp
 PREFIX := .
 
 MATLAB_VERSION := r2026a
-MATLAB_SIF := ../../matlab/$(MATLAB_VERSION)/rockylinux9/matlab.sif
+MATLAB_SIF := ../../matlab/$(MATLAB_VERSION)/rockylinux9/x86_64/matlab.sif
 MATLAB_PROXY_SIF := $(PREFIX)/matlab-proxy-$(MATLAB_VERSION).sif
 MATLAB_PROXY_DEF := matlab-proxy.def
 
