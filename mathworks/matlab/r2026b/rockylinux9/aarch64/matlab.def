@@ -23,15 +23,6 @@ From: rockylinux/rockylinux:9.8
 
     # TODO: Install MATLAB
 
-    # Install MATLAB Proxy
-    dnf install -y epel-release
-    dnf install -y python3.14 python3.14-pip xorg-x11-server-Xvfb openbox
-    dnf clean all -y
-    python3.14 -m venv /opt/venv
-    export PATH=/opt/venv/bin:$PATH
-    python3 -m pip install --upgrade pip
-    python3 -m pip install --no-cache-dir matlab-proxy==0.36.0
-
 %environment
     export LANG=en_us.UTF-8
     export TZ="Etc/UTC"
