@@ -8,7 +8,7 @@ MATLAB_DEF := matlab.def
 all: $(MATLAB_SIF)
 
 $(MATLAB_SIF): $(MATLAB_DEF) base-dependencies.txt mpm_input.txt
-	apptainer build --fakeroot --bind=$(TMPDIR):/tmp --mksquashfs-args=-no-compression $@ $<
+	apptainer build --fakeroot --bind=$(TMPDIR):/tmp $@ $<
 
 .PHONY: clean
 clean:
