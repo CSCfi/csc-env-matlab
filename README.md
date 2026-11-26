@@ -11,19 +11,19 @@ The MathWorks ServiceHost is installed with the `servicehost.yaml` playbook (see
 
 ## Install MATLAB on a cluster
 
-Run the per-system playbook from the repository root. Install into the `-l` system and the `version` you name:
+Run the root `install.yaml` from the repository root. The `system` picks the target host group and the `version` picks the release:
 
 ```bash
-ansible-playbook -i hosts.yaml -l <lumi|roihu_cpu|roihu_gpu> -e version=<release> system/<system>/install.yaml
+ansible-playbook -i hosts.yaml -e system=<lumi|roihu_cpu|roihu_gpu> -e version=<release> install.yaml
 ```
 
 For example, to install R2025a on Roihu CPU:
 
 ```bash
-ansible-playbook -i hosts.yaml -l roihu_cpu -e version=r2025a system/roihu_cpu/install.yaml
+ansible-playbook -i hosts.yaml -e system=roihu_cpu -e version=r2025a install.yaml
 ```
 
-The `version` must have a directory at `system/<system>/version/<release>/`. List the available releases with:
+The `system` and `version` are required. The `version` must have a directory at `system/<system>/version/<release>/`. List the available releases with:
 
 ```bash
 ls system/<system>/version/
@@ -32,7 +32,7 @@ ls system/<system>/version/
 Dry-run first to see what would change on the target, without changing anything:
 
 ```bash
-ansible-playbook --check --diff -i hosts.yaml -l <system> -e version=<release> system/<system>/install.yaml
+ansible-playbook --check --diff -i hosts.yaml -e system=<system> -e version=<release> install.yaml
 ```
 
 These playbooks write to shared `/appl` trees on production hosts. Run them only with explicit approval, and check the target system and version first.

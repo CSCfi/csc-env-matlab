@@ -8,6 +8,10 @@ lumi:
     group: "appl_csc"
     appl_dir: "/appl/local/csc/soft/math"
     modulefiles_dir: "/appl/local/csc/modulefiles"
+    bin_files: ["matlab", "matlab-proxy-app"]
+    bin_templates: ["matlab-singularity-exec"]
+    version_files: []
+    module_subdir: "matlab"
 roihu_cpu:
   hosts:
     roihu-cpu-inst.csc.fi:
@@ -17,6 +21,10 @@ roihu_cpu:
     group: "r_installation_general"
     appl_dir: "/appl/soft/manual/general/x86_64"
     modulefiles_dir: "/appl/modulefiles/manual/general/x86_64"
+    bin_files: ["matlab", "matlab-proxy-app"]
+    bin_templates: ["matlab-apptainer-exec", "worker"]
+    version_files: ["extract_binaries.sh"]
+    module_subdir: "matlab"
 roihu_gpu:
   hosts:
     roihu-gpu-inst.csc.fi:
@@ -26,3 +34,7 @@ roihu_gpu:
     group: "r_installation_general"
     appl_dir: "/appl/soft/manual/general/aarch64"
     modulefiles_dir: "/appl/modulefiles/manual/general/aarch64"
+    bin_files: ["matlab"]
+    bin_templates: ["matlab-apptainer-exec", "worker"]
+    version_files: ["extract_binaries.sh"]
+    module_subdir: ".matlab"

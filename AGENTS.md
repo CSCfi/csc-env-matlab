@@ -14,9 +14,8 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 
 ## Layout
 
-- Install playbooks are run directly with `ansible-playbook` (see README.md): `system/<system>/install.yaml` with `-i hosts.yaml -l <system> -e version=<release>`.
+- `install.yaml`: the install playbook for all systems, run directly with `ansible-playbook` (see README.md): `-i hosts.yaml -e system=<system> -e version=<release>`. Per-system differences (which files to install, module subdirectory) live in `hosts.yaml` group vars.
 - `hosts.yaml`: inventory. Hostnames, interpreter paths, group, and install dirs per system.
-- `system/<system>/install.yaml`: per-system Ansible playbook. It creates directories, copies scripts, and runs the version-specific install.
 - `system/<system>/version/<release>/`: per-release files. `matlab.lua` or `matlab.lua.j2` is the modulefile, `extract_binaries.sh` extracts binaries, and `bin/` holds launch wrappers (`matlab`, `matlab-proxy-app`, `worker.j2`, `matlab-apptainer-exec.j2` or `matlab-singularity-exec.j2`). Files with `.j2` are Jinja2 templates.
 - `servicehost.yaml`: playbook for the MathWorks Service Host on lumi and roihu_cpu. Downloads and unzips the package on the target, runs `mksquashfs` to build `mathworksservicehost-<version>.sqfs`, installs it into `{{ appl_dir }}/mathworks/servicehost`, and links `mathworksservicehost.sqfs`. Run with `-e version=<release>`, optionally `-e checksum=sha256:<hash>`.
 - `matlab/<release>/rockylinux9/<arch>/`: container build material (`matlab.def`, `Makefile`, MPM inputs). Builds include MATLAB Proxy.
@@ -27,7 +26,7 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 
 ## Conventions
 
-- Adding a MATLAB release means adding `system/<system>/version/<release>/` for each system it targets, . Copy the closest existing release directory rather than writing from scratch.
+- Adding a MATLAB release means adding `system/<system>/version/<release>/` for each system it targets. Copy the closest existing release directory rather than writing from scratch.
 - Keep the `system/*/version/*` layout consistent across systems. The three systems differ by architecture and paths, which `hosts.yaml` holds.
 - Templates (`.j2`) are rendered by Ansible. Edit the template, not any rendered output.
 - Shared install directories are group-writable with the setgid bit (`ug=rwx,o=rx,g+s`). Keep that mode when adding directories.
@@ -35,13 +34,13 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 
 ## Safety
 
-- The playbooks run against production login and installation hosts (`*.csc.fi`) and write to shared `/appl` trees. Do not run `ansible-playbook` on `system/*/install.yaml` or `servicehost.yaml` without explicit user approval, and always check the target system and version first.
+- The playbooks run against production login and installation hosts (`*.csc.fi`) and write to shared `/appl` trees. Do not run `ansible-playbook` on `install.yaml` or `servicehost.yaml` without explicit user approval, and always check the target system and version first.
 - Do not edit or delete files under an installed version directory on a cluster. Changes go through the repo and a new install.
 - Do not put license files, credentials, or host secrets in the repo.
 
 ## Verification
 
-- There is no automated test suite for the playbooks. Lint or dry-run changes with `ansible-playbook --check --diff -i hosts.yaml -l <system> -e version=<release> system/<system>/install.yaml` before a real run.
+- There is no automated test suite for the playbooks. Lint or dry-run changes with `ansible-playbook --check --diff -i hosts.yaml -e system=<system> -e version=<release> install.yaml` before a real run.
 - After a real install, run the scripts in `test/mps/` on the target system to check parallel pools and GPU use.
 - Use `uv` for any Python tooling added to the repo, not bare `pip`.
 - Run `shellcheck` on any shell script you write or change, and format it with `shfmt -i 4 -ci -w <file>` (4-space indent, case bodies indented).
