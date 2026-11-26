@@ -21,8 +21,8 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 - `hosts.yaml`: inventory. Hostnames, interpreter paths, group, and install dirs per system.
 - `system/<system>/install.yaml`: per-system Ansible playbook. It creates directories, copies scripts, and runs the version-specific install.
 - `system/<system>/version/<release>/`: per-release files. `matlab.lua` or `matlab.lua.j2` is the modulefile, `extract_binaries.sh` extracts binaries, and `bin/` holds launch wrappers (`matlab`, `matlab-proxy-app`, `worker.j2`, `matlab-apptainer-exec.j2` or `matlab-singularity-exec.j2`). Files with `.j2` are Jinja2 templates.
-- `servicehost/`: Service Host install playbook, templates, and per-version YAML (`version/<release>.yaml`).
-- `mathworks/`: container build material. `matlab/<release>/` builds include MATLAB Proxy. `servicehost/` has a Makefile and `squashfs.sh`.
+- `servicehost/`: Service Host install playbook, templates, and per-version YAML (`version/<release>.yaml`). Also holds the squashfs build (`Makefile`, `squashfs.sh`).
+- `matlab/<release>/rockylinux9/<arch>/`: container build material (`matlab.def`, `Makefile`, MPM inputs). Builds include MATLAB Proxy.
 - `license/`: license server config for the CSC and LUMI academic licenses (Lua).
 - `test/`: smoke tests run after installation. `test/mps/` covers parallel pools (serial, threads, processes, GPU), and `test/mex/` covers MEX builds.
 - `extras/`: extra MATLAB config (`mpiLibConf.m`).
