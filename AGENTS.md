@@ -16,12 +16,10 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 
 - `Argcfile.sh`: entry point for all tasks, run through [argc](https://github.com/sigoden/argc). Run `argc --help` to list commands.
   - `install-matlab --system <lumi|roihu_cpu|roihu_gpu> --version <release>`: runs `system/<system>/install.yaml` with `hosts.yaml`.
-  - `print-latest-servicehost`: prints the latest Service Host version and checksum.
-  - `install-servicehost --system lumi --version <version>`: runs `servicehost/install.yaml`. Defaults to 2026.3.0.6 and warns if that is not the latest release.
 - `hosts.yaml`: inventory. Hostnames, interpreter paths, group, and install dirs per system.
 - `system/<system>/install.yaml`: per-system Ansible playbook. It creates directories, copies scripts, and runs the version-specific install.
 - `system/<system>/version/<release>/`: per-release files. `matlab.lua` or `matlab.lua.j2` is the modulefile, `extract_binaries.sh` extracts binaries, and `bin/` holds launch wrappers (`matlab`, `matlab-proxy-app`, `worker.j2`, `matlab-apptainer-exec.j2` or `matlab-singularity-exec.j2`). Files with `.j2` are Jinja2 templates.
-- `servicehost/`: Service Host install playbook, templates, and per-version YAML (`version/<release>.yaml`). Also holds the squashfs build (`Makefile`, `squashfs.sh`).
+- `servicehost.yaml`: playbook for the MathWorks Service Host on lumi and roihu_cpu. Downloads and unzips the package on the target, runs `mksquashfs` to build `mathworksservicehost-<version>.sqfs`, installs it into `{{ appl_dir }}/mathworks/servicehost`, and links `mathworksservicehost.sqfs`. Run with `-e version=<release>`, optionally `-e checksum=sha256:<hash>`.
 - `matlab/<release>/rockylinux9/<arch>/`: container build material (`matlab.def`, `Makefile`, MPM inputs). Builds include MATLAB Proxy.
 - `license/`: license server config for the CSC and LUMI academic licenses (Lua).
 - `test/`: smoke tests run after installation. `test/mps/` covers parallel pools (serial, threads, processes, GPU), and `test/mex/` covers MEX builds.
