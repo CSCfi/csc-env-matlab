@@ -4,7 +4,7 @@ family("matlab")
 version = myModuleVersion()
 
 -- Path to the application directory.
-appl_dir = "/appl/local/csc/soft/math"
+appl_dir = "{{ appl_dir }}"
 
 -- Add wrapper scripts to the path.
 bin_dir = pathJoin(appl_dir, "matlab", version, "bin")

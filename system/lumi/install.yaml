@@ -39,13 +39,13 @@
           dest: "{{ appl_dir }}/matlab/{{ version }}/bin/matlab-singularity-exec"
 
     - name: "Regular files"
-      ansible.builtin.copy:
+      ansible.builtin.template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         mode: "ug=rw,o=r"
         group: "{{ group }}"
       loop:
-        - src: "{{ playbook_dir }}/version/{{ version }}/matlab.lua"
+        - src: "{{ playbook_dir }}/version/{{ version }}/matlab.lua.j2"
           dest: "{{ modulefiles_dir }}/matlab/{{ version }}.lua"
 
     - name: "Container file dummy. Real container should be scp'ed to its place."
