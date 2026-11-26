@@ -47,3 +47,4 @@ Installation is driven by Ansible. The container definitions build on the MathWo
 - There is no automated test suite for the playbooks. Lint or dry-run changes with `ansible-playbook --check --diff -i hosts.yaml -l <system> -e version=<release> system/<system>/install.yaml` before a real run.
 - After a real install, run the scripts in `test/mps/` on the target system to check parallel pools and GPU use.
 - Use `uv` for any Python tooling added to the repo, not bare `pip`.
+- Run `shellcheck` on any shell script you write or change, and format it with `shfmt -i 4 -ci -w <file>` (4-space indent, case bodies indented).
