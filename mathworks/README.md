@@ -23,20 +23,10 @@ Run with custom license file or license server:
 apptainer exec --bind=/run/user --env="MLM_LICENSE_FILE=<license-file-or-server>" matlab/r2025a/rockylinux9/x86_64/matlab.sif matlab
 ```
 
-## MATLAB proxy
-
-Apptainer container which extends the MATLAB container image with the [MATLAB Proxy](https://github.com/mathworks/matlab-proxy), an HTML-based web interface for MATLAB.
-
-Change working directory and build the container image:
+The MATLAB container also includes the [MATLAB Proxy](https://github.com/mathworks/matlab-proxy), an HTML-based web interface for MATLAB. Start it with:
 
 ```bash
-make --directory=matlab-proxy/rockylinux9
-```
-
-Run the container:
-
-```bash
-apptainer exec --bind=/run/user matlab-proxy/rockylinux9/matlab-proxy-r2025a.sif matlab-proxy-app
+apptainer exec --bind=/run/user matlab/r2025a/rockylinux9/x86_64/matlab.sif matlab-proxy-app
 ```
 
 ## Administered MathWorks Service Host
