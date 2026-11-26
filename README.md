@@ -1,6 +1,6 @@
 # csc-env-matlab
 
-Documentation for Puhti, Mahti, Roihu and LUMI installation is available on [documentation](https://docs.csc.fi/apps/matlab/).
+Documentation for Roihu and LUMI installation is available on [documentation](https://docs.csc.fi/apps/matlab/).
 
 The container definitions use the official [MATLAB container dependencies](https://github.com/mathworks-ref-arch/container-images) and the [MATLAB Package Manager (MPM)](https://github.com/mathworks-ref-arch/matlab-dockerfile) to install MATLAB and all available toolboxes on Linux.
 The installation also includes the [MATLAB Proxy](https://github.com/mathworks/matlab-proxy) for an HTML-based web interface.
