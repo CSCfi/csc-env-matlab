@@ -9,6 +9,6 @@ export APPTAINERENV_LD_PRELOAD=""
 # Exec matlab container
 apptainer --silent exec \
     --bind="/run/user" \
-    --bind="/users,/projappl,/scratch,/dataset,$TMPDIR,$LOCAL_SCRATCH" \
+    --bind="/users,/projappl,/scratch,/dataset,/sbf,$TMPDIR,$LOCAL_SCRATCH" \
     --nv \
     "${MATLAB_SIF_IMAGE}" "$@"
