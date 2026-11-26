@@ -8,19 +8,19 @@ The container definitions use the official [MATLAB container dependencies](https
 Build the container image:
 
 ```bash
-make --directory=matlab/r2025a/rockylinux8
+make --directory=matlab/r2025a/rockylinux9
 ```
 
 Run the container:
 
 ```bash
-apptainer exec --bind=/run/user matlab/r2025a/rockylinux8/matlab.sif matlab
+apptainer exec --bind=/run/user matlab/r2025a/rockylinux9/matlab.sif matlab
 ```
 
 Run with custom license file or license server:
 
 ```bash
-apptainer exec --bind=/run/user --env="MLM_LICENSE_FILE=<license-file-or-server>" matlab/r2025a/rockylinux8/matlab.sif matlab
+apptainer exec --bind=/run/user --env="MLM_LICENSE_FILE=<license-file-or-server>" matlab/r2025a/rockylinux9/matlab.sif matlab
 ```
 
 ## MATLAB proxy
@@ -30,13 +30,13 @@ Apptainer container which extends the MATLAB container image with the [MATLAB Pr
 Change working directory and build the container image:
 
 ```bash
-make --directory=matlab-proxy/rockylinux8
+make --directory=matlab-proxy/rockylinux9
 ```
 
 Run the container:
 
 ```bash
-apptainer exec --bind=/run/user matlab-proxy/rockylinux8/matlab-proxy-r2025a.sif matlab-proxy-app
+apptainer exec --bind=/run/user matlab-proxy/rockylinux9/matlab-proxy-r2025a.sif matlab-proxy-app
 ```
 
 ## Administered MathWorks Service Host
@@ -56,5 +56,5 @@ apptainer exec \
     --bind=/run/user \
     --bind=./servicehost/mathworksservicehost.sqfs:/opt/mathworksservicehost:image-src=/ \
     --env=MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT=/opt/mathworksservicehost \
-    matlab/r2025a/rockylinux8/matlab.sif matlab
+    matlab/r2025a/rockylinux9/matlab.sif matlab
 ```
