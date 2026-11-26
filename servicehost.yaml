@@ -1,0 +1,117 @@
+- name: "Install MathWorks ServiceHost"
+  hosts:
+    - "lumi"
+    - "roihu_cpu"
+  become: false
+
+  tasks:
+    - name: "Check the ServiceHost version is given"
+      ansible.builtin.assert:
+        that:
+          - "version is defined"
+        fail_msg: "Pass the version with -e version=<release>"
+
+    - name: "Create the ServiceHost directories"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "{{ appl_dir }}/mathworks"
+        - "{{ appl_dir }}/mathworks/servicehost"
+
+    - name: "Create a temporary build directory"
+      ansible.builtin.tempfile:
+        state: "directory"
+      register: "build_dir"
+
+    - name: "Build the ServiceHost squashfs"
+      block:
+        - name: "Download the ServiceHost package"
+          ansible.builtin.get_url:
+            url: "https://ssd.mathworks.com/supportfiles/downloads/MathWorksServiceHost/v{{ version }}/release/glnxa64/\
+              managed_mathworksservicehost_{{ version }}_package_glnxa64.zip"
+            dest: "{{ build_dir.path }}/mathworksservicehost-{{ version }}.zip"
+            checksum: "{{ checksum | default(omit) }}"
+            mode: "u=rw,go=r"
+
+        - name: "Create the ServiceHost squashfs root"
+          ansible.builtin.file:
+            path: "{{ build_dir.path }}/root/{{ version }}"
+            state: "directory"
+            mode: "u=rwx,go=rx"
+
+        - name: "Unzip the ServiceHost package"
+          ansible.builtin.unarchive:
+            src: "{{ build_dir.path }}/mathworksservicehost-{{ version }}.zip"
+            dest: "{{ build_dir.path }}/root/{{ version }}"
+            remote_src: true
+            creates: "{{ build_dir.path }}/root/{{ version }}/bin"
+
+        - name: "Write LatestInstall.info"
+          ansible.builtin.copy:
+            dest: "{{ build_dir.path }}/root/LatestInstall.info"
+            mode: "u=rw,go=r"
+            content: |
+              LatestDSInstallerVersion {{ version }}
+              LatestDSInstallRoot /opt/mathworksservicehost/{{ version }}
+              DSLauncherExecutable /opt/mathworksservicehost/{{ version }}/bin/glnxa64/MathWorksServiceHost
+
+        - name: "Make the ServiceHost squashfs"
+          ansible.builtin.command:
+            argv:
+              - "mksquashfs"
+              - "{{ build_dir.path }}/root"
+              - "{{ build_dir.path }}/mathworksservicehost-{{ version }}.sqfs"
+              - "-all-root"
+          changed_when: true
+
+        - name: "Install the ServiceHost squashfs"
+          ansible.builtin.copy:
+            src: "{{ build_dir.path }}/mathworksservicehost-{{ version }}.sqfs"
+            dest: "{{ appl_dir }}/mathworks/servicehost/mathworksservicehost-{{ version }}.sqfs"
+            remote_src: true
+            mode: "ug=rw,o=r"
+            group: "{{ group }}"
+
+        - name: "Link the current ServiceHost squashfs"
+          ansible.builtin.file:
+            src: "mathworksservicehost-{{ version }}.sqfs"
+            dest: "{{ appl_dir }}/mathworks/servicehost/mathworksservicehost.sqfs"
+            state: "link"
+            force: true
+      always:
+        - name: "Remove the temporary build directory"
+          ansible.builtin.file:
+            path: "{{ build_dir.path }}"
+            state: "absent"
+
+- name: "Synchronize ServiceHost across LUMI Lustres"
+  hosts:
+    - "lumi"
+  become: false
+
+  tasks:
+    - name: "Create the ServiceHost application directories"
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: "directory"
+        mode: "ug=rwx,o=rx,g+s"
+        group: "{{ group }}"
+      loop:
+        - "/pfs/lustrep1/{{ appl_dir }}/mathworks/servicehost"
+        - "/pfs/lustrep3/{{ appl_dir }}/mathworks/servicehost"
+        - "/pfs/lustrep4/{{ appl_dir }}/mathworks/servicehost"
+
+    - name: "Synchronize the ServiceHost installation"
+      ansible.builtin.command: |
+        rsync --archive --delete "{{ item.src }}" "{{ item.dest }}"
+      loop:
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworks/servicehost/"
+          dest: "/pfs/lustrep1/{{ appl_dir }}/mathworks/servicehost"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworks/servicehost/"
+          dest: "/pfs/lustrep3/{{ appl_dir }}/mathworks/servicehost"
+        - src: "/pfs/lustrep2/{{ appl_dir }}/mathworks/servicehost/"
+          dest: "/pfs/lustrep4/{{ appl_dir }}/mathworks/servicehost"
+      changed_when: true
