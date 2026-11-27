@@ -17,11 +17,15 @@ From: rockylinux/rockylinux:9.8
     # Install dependencies
     dnf update -y
     dnf install -y --allowerasing $(cat /opt/base-dependencies.txt)
-    dnf clean all -y
+    dnf install -y --allowerasing gcc gcc-c++ gcc-gfortran
 
     [ -d /usr/share/X11/xkb ] || mkdir -p /usr/share/X11/xkb
 
     # TODO: Install MATLAB
+    dnf install -y --allowerasing curl ca-certificates
+
+    # Clean packages at the end of the build.
+    dnf clean all -y
 
 %environment
     export LANG=en_us.UTF-8

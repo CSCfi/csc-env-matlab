@@ -17,11 +17,12 @@ From: rockylinux/rockylinux:9.8
     # Install dependencies
     dnf update -y
     dnf install -y --allowerasing $(cat /opt/base-dependencies.txt)
-    dnf clean all -y
+    dnf install -y --allowerasing gcc gcc-c++ gcc-gfortran
 
     [ -d /usr/share/X11/xkb ] || mkdir -p /usr/share/X11/xkb
 
     # Install MATLAB
+    dnf install -y --allowerasing curl ca-certificates
     mkdir -p /opt/build
     cd /opt/build
     curl --location --remote-name https://www.mathworks.com/mpm/glnxa64/mpm
@@ -36,11 +37,13 @@ From: rockylinux/rockylinux:9.8
     # Install MATLAB Proxy
     dnf install -y epel-release
     dnf install -y python3.14 python3.14-pip xorg-x11-server-Xvfb openbox
-    dnf clean all -y
     python3.14 -m venv /opt/venv
     export PATH=/opt/venv/bin:$PATH
     python3 -m pip install --upgrade pip
     python3 -m pip install --no-cache-dir matlab-proxy==0.36.0
+
+    # Clean packages at the end of the build.
+    dnf clean all -y
 
 %environment
     export LANG=en_us.UTF-8
